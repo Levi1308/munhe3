@@ -1,12 +1,16 @@
 package GameTiles.Unit.Player;
 
+
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.Enemy;
 import java.util.List;
 
+import GameTiles.GameTile;
+
 public class Rouge extends Player{
     private Integer cost;
     private Integer current_energy=100;
+
 
     public Rouge(int x, int y, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
         super(x,y,name, health_pool, attack_points, defense_points);
@@ -26,12 +30,17 @@ public class Rouge extends Player{
     public void interact(Unit unit) {
         unit.interact(this);
     }
+
+   
+
+    
     public String description()
     {
         return super.description()+
                 "cost: " + cost + "\n" +
                 "current_energy: " + current_energy+"\n";
     }
+
     public void castAbility() {
         if (current_energy > cost) {
             manager.sendMessage(getName() + " used Fan of Knives");
@@ -47,4 +56,5 @@ public class Rouge extends Player{
             manager.sendMessage(getName() + " tried to cast Fan of Knives, but there was not enough energy: " + current_energy + '/' + cost);
         }
     }
+
 }

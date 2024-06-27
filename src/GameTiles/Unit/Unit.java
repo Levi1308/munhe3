@@ -45,6 +45,10 @@ public abstract class Unit extends GameTile implements Visitor {
 
     public Integer getCurrent_health() {
         return current_health;
+=======
+    public Integer getHealth_amount() {
+        return health_amount;
+
     }
 
     public Integer getAttack_points() {
@@ -54,6 +58,7 @@ public abstract class Unit extends GameTile implements Visitor {
     public Integer getDefense_points() {
         return defense_points;
     }
+
 
     public static List<Enemy> getEnemyList() {
         return enemyList;

@@ -1,4 +1,5 @@
 package GameTiles.Unit.Player;
+
 import GameTiles.Unit.Enemy.Enemy;
 import GameTiles.GameTile;
 import GameTiles.Unit.Unit;
@@ -9,12 +10,18 @@ import java.util.Random;
 
 
 public class Mage extends Player {
+
+
+import GameTiles.GameTile;
+public class Mage extends Player{
+
     private Integer mana_pool;
     private Integer current_mana;
     private Integer mana_cost;
     private Integer spell_power;
     private Integer hits_count;
     private Integer ability_range;
+
 
     public  Mage(int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer mana_pool, Integer mana_cost, Integer spell_power, Integer hits_count, Integer ability_range) {
         super(x,y, name, health_pool, attack_points, defense_points);
@@ -31,13 +38,15 @@ public class Mage extends Player {
         current_mana=Math.min(current_mana+mana_pool/4,mana_pool);
         spell_power=spell_power+10*getLevel();
     }
+
     @Override
     public void on_GameTick() {
         current_mana = Math.min(mana_pool, current_mana + getLevel());
     }
     public void interact(Unit unit) {
         unit.interact(this);
-    }
+
+    
     public String description()
     {
         return super.description()+
@@ -48,6 +57,7 @@ public class Mage extends Player {
                 "hits_count: " + hits_count + "\n" +
                 "ability_range: " + ability_range+"\n";
     }
+
     public void castAbility() {
         if (current_mana > mana_cost) {
             current_mana = current_mana - mana_cost;
@@ -71,4 +81,5 @@ public class Mage extends Player {
             manager.sendMessage(getName() + " tried to cast Blizzard, but there was not enough mana: " + current_mana + '/' + mana_cost);
         }
     }
+
 }

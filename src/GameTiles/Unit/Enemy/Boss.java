@@ -1,7 +1,9 @@
 package GameTiles.Unit.Enemy;
 
 import java.util.Random;
+
 import GameTiles.Unit.HeroicUnit;
+
 
 public class Boss extends Monster implements HeroicUnit{
     private int ability_frequency;

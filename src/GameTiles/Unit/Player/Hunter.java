@@ -1,16 +1,20 @@
 package GameTiles.Unit.Player;
 
 import GameTiles.GameTile;
+
 import GameTiles.Unit.Enemy.Enemy;
 import java.util.List;
+
 import GameTiles.Unit.Unit;
 
 public class Hunter extends Player {
     private Integer range;
     private Integer arrows_count;
     private Integer ticks_count=0;
+
     public Hunter(int x, int y, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
         super(x,y,name, health_pool, attack_points, defense_points);
+
         this.range=range;
         this.arrows_count=arrows_count;
     }
@@ -22,7 +26,9 @@ public class Hunter extends Player {
         setAttack_points(getAttack_points()+2*getLevel());
         setDefense_points(getDefense_points()+getLevel());
     }
+
     public void On_GameTick()
+
     {
         if(ticks_count==10)
         {
@@ -33,15 +39,17 @@ public class Hunter extends Player {
             ticks_count++;
     }
     @Override
+
     public void interact(Unit unit) {
         unit.interact(this);
-    }
+
     public String description() {
         return super.description()+
                 "range: " + range + "\n" +
                 "arrows_count: " + arrows_count + "\n" +
                 "ticks_count: " + ticks_count+"\n";
     }
+
     @Override
     public void castAbility() {
         if (arrows_count > 0) {
@@ -67,5 +75,6 @@ public class Hunter extends Player {
         }
 
     }
+
 
 }

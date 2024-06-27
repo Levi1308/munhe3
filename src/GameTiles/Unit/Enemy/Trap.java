@@ -47,7 +47,9 @@ public class Trap extends Enemy{
         }
     }
 
+
     public void interact(GameTile tile) {
+
 
     }
 
