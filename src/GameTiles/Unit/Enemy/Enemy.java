@@ -1,11 +1,20 @@
 package GameTiles.Unit.Enemy;
 
+
+import GameTiles.Unit.*;
+import GameTiles.Unit.Player.Player;
+
+public abstract class Enemy extends Unit{
+    private Integer experience_value;
+    public static Player player;
+
 import GameTiles.GameTile;
 import GameTiles.Unit.Unit;
 
 public abstract class Enemy extends Unit{
     private Integer experience_value;
     protected static Player player;
+
 
     public Enemy(char tile, int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer experience_value) {
         super(tile, x, y, name, health_pool, attack_points, defense_points);
@@ -34,7 +43,9 @@ public abstract class Enemy extends Unit{
     public void lose_health(int num){
         this.setCurrent_health(getCurrent_health() - num);
         if (isDead()){
-//            player.swapTiles(this);
+
+            player.swapTiles(this);
+
             manager.sendMessage(getName() + " died. " + player.getName() + " gained " + experience_value + " experience.");
             player.addExp(this.experience_value);
             manager.removeEnemy(this);

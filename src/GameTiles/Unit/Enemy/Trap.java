@@ -1,5 +1,8 @@
 package GameTiles.Unit.Enemy;
 
+import GameTiles.GameTile;
+import GameTiles.Unit.Unit;
+
 public class Trap extends Enemy{
     private int visibility_time;
     private int invisibility_time;
@@ -44,7 +47,9 @@ public class Trap extends Enemy{
         }
     }
 
-    public void interact(Tile tile) {
+
+    public void interact(GameTile tile) {
+
 
     }
 
