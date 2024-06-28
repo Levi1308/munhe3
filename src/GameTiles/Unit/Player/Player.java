@@ -5,40 +5,40 @@ package GameTiles.Unit.Player;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Visited;
+import GameTiles.GameTile;
 
 import GameTiles.Unit.HeroicUnit;
 
 
 public abstract class Player extends Unit implements HeroicUnit{
-    private Integer experience;
-    private Integer level;
+    private Integer experience = 0;
+    private Integer level = 1;
 
-    public Player(int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points) {
-        super('@', x, y, name, health_pool, attack_points, defense_points);
-        this.experience = 0;
-        this.level = 1;
-        Enemy.player = this;
-        manager.setPlayer(this);
+    public Player(String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points,GameTile gameTile) {
+        super(name, health_pool, health_amount, attack_points, defense_points, gameTile);
     }
-
-    public Integer getExperience() {
-        return experience;
+    public void levelUp()
+    {
+        experience+=50*level;
+        level++;
+        setHealth_pool(getHealth_pool()+10*level);
+        setHealth_amount(getHealth_pool());
+        setAttack_points(getAttack_points()+4*level);
+        setDefense_points(getDefense_points()+level);
     }
+    abstract public void OnAbilityCast();
 
     public Integer getLevel() {
         return level;
     }
 
-    public void levelUp(){
-        experience = experience - (level * 50);
-        level = level + 1;
-        setHealth_pool(getHealth_pool() + (10 * level));
-        setCurrent_health(getHealth_pool());
-        setAttack_points(getAttack_points() + (4 * level));
-        setDefense_points(getDefense_points() + level);
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public abstract void castAbility();
+    public Integer getExperience() {
+        return experience;
+    }
 
     public void addExp(int experience) {
         this.experience = this.experience + experience;
@@ -47,12 +47,14 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-    public String description() {
-        return super.description() + ", Level: " + level + ", Experience: " + experience + '/' + (50 * level);
-    }
-    public abstract void on_GameTick();
+    public String description(){
+        return super.description()+
+                "experience: " + experience + "\n" +
+                "level: " + level;
 
-    protected void battle(Enemy enemy){
+    }
+
+    /*protected void battle(Enemy enemy){
         manager.sendMessage(getName() + " engaged in combat with " + enemy.getName() + '.');
         int rand_att = random_Attack();
         int rand_def = enemy.random_Defense();
@@ -64,10 +66,10 @@ public abstract class Player extends Unit implements HeroicUnit{
             manager.sendMessage(getName() + " dealt " + 0 + " to " + enemy.getName() + ".");
         }
         manager.sendMessage(enemy.description());
-    }
+    */}
 
-    public void lose_health(int damage){
-        setCurrent_health(getCurrent_health() - damage);
+    /*public void lose_health(int damage){
+        setHealth_amount(getHealth_amount() - damage);
         if (isDead()) {
             setTile('X');
             manager.sendMessage("Game is over, you lost :(");
@@ -75,12 +77,12 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-    public void interact(Enemy enemy){
+    /*public void interact(Enemy enemy){
         this.battle(enemy);
-    }
+    */}
 
 
-    public void interact(Player player){}
+    /*public void interact(Player player){}
 
     public void moveUp() {
         Visited tile = board.getTile(getX() - 1, getY());  //move up
@@ -100,5 +102,6 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void moveRight() {
         Visited tile = board.getTile(getX(), getY() + 1); //move right
         tile.accept(this);
-    }
+    */}
 }
+
