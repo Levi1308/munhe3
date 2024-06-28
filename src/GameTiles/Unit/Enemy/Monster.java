@@ -5,6 +5,8 @@ import GameTiles.GameTile;
 import GameTiles.Unit.Unit;
 
 
+import java.util.Random;
+
 public class Monster extends Enemy {
 
     private Integer vision_range;
@@ -22,9 +24,7 @@ public class Monster extends Enemy {
         if (this.range(player) < (double) this.vision_range) {
             int dx = this.getX() - player.getX();
             int dy = this.getY() - player.getY();
-
             GameTile tile;
-
             if (Math.abs(dy) > Math.abs(dx)) {
                 if (dy > 0) {
                     tile = board.getTile(getX(), getY() - 1); // move left
@@ -43,12 +43,10 @@ public class Monster extends Enemy {
         }
         else
         {
-
             GameTile[] arr = {board.getTile(getX(), getY() - 1), board.getTile(getX(), getY() + 1), board.getTile(getX() - 1, getY()), board.getTile(getX() + 1, getY()), board.getTile(getX(), getY())};
             Random r = new Random();
             int random_number = r.nextInt(5);
             GameTile tile1 = arr[random_number];
-
             tile1.accept(this);
         }
     }
@@ -57,9 +55,7 @@ public class Monster extends Enemy {
         return vision_range;
     }
 
-
     public void interact(GameTile tile) {
-
         tile.interact(this);
     }
 
@@ -69,4 +65,3 @@ public class Monster extends Enemy {
 
     public void interact(Enemy enemy){}
 }
-

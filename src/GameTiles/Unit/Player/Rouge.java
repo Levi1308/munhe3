@@ -7,38 +7,17 @@ import java.util.List;
 
 import GameTiles.GameTile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rouge extends Player{
     private Integer cost;
-    private Integer current_energy=100;
+    private Integer current_energy;
 
-
-    public Rouge(int x, int y, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
-        super(x,y,name, health_pool, attack_points, defense_points);
-    this.cost=cost;
-    }
-
-    public void LevelUp() {
-        super.levelUp();
-        current_energy=100;
-        setAttack_points(getAttack_points()+3*getLevel());
-    }
-    @Override
-    public void On_GameTick()
-    {
-        current_energy=Math.min(current_energy+10,10100);
-    }
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
-
-   
-
-    
-    public String description()
-    {
-        return super.description()+
-                "cost: " + cost + "\n" +
-                "current_energy: " + current_energy+"\n";
+    public Rouge(int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer cost) {
+        super(x, y, name, health_pool, attack_points, defense_points);
+        this.cost = cost;
+        current_energy = 100;
     }
 
     public void castAbility() {
@@ -57,4 +36,22 @@ public class Rouge extends Player{
         }
     }
 
+    @Override
+    public void on_GameTick() {
+        current_energy = Math.min(current_energy + 10, 100);
+    }
+
+    public void levelUp() {
+        super.levelUp();
+        current_energy = 100;
+        setAttack_points(getAttack_points() + (3 * getLevel()));
+    }
+
+    public void interact(Unit unit) {
+        unit.interact(this);
+    }
+
+    public String description() {
+        return super.description() + ", Energy: " + current_energy + "/100";
+    }
 }

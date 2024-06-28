@@ -9,7 +9,7 @@ public class Trap extends Enemy{
     private int tick_count;
     private char original_tile;
     private boolean visible;
-  
+
     public Trap(char tile, int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer experience_value, int visibility_time, int invisibility_time) {
         super(tile, x, y, name, health_pool, attack_points, defense_points, experience_value);
         this.visible = true;
@@ -47,9 +47,7 @@ public class Trap extends Enemy{
         }
     }
 
-
     public void interact(GameTile tile) {
-
 
     }
 
@@ -67,4 +65,3 @@ public class Trap extends Enemy{
         this.visible = visible;
     }
 }
-

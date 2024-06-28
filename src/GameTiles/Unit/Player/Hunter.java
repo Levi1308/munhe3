@@ -7,49 +7,20 @@ import java.util.List;
 
 import GameTiles.Unit.Unit;
 
-public class Hunter extends Player {
-    private Integer range;
-    private Integer arrows_count;
-    private Integer ticks_count=0;
+import java.util.List;
 
-    public Hunter(int x, int y, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
-        super(x,y,name, health_pool, attack_points, defense_points);
+public class Hunter extends Player{
 
-        this.range=range;
-        this.arrows_count=arrows_count;
+    private int range;
+    private int arrows_count;
+    private int ticks_count;
+
+    public Hunter(int x, int y, String name, int health_pool, int attack_points, int defense_points, int range) {
+        super(x, y, name, health_pool, attack_points, defense_points);
+        this.range = range;
+        this.arrows_count = 10;
+        this.ticks_count = 0;
     }
-
-
-    public void LevelUp() {
-        super.levelUp();
-        arrows_count=arrows_count+10*getLevel();
-        setAttack_points(getAttack_points()+2*getLevel());
-        setDefense_points(getDefense_points()+getLevel());
-    }
-
-    public void On_GameTick()
-
-    {
-        if(ticks_count==10)
-        {
-            arrows_count--;
-            ticks_count=0;
-        }
-        else
-            ticks_count++;
-    }
-    @Override
-
-    public void interact(Unit unit) {
-        unit.interact(this);
-
-    public String description() {
-        return super.description()+
-                "range: " + range + "\n" +
-                "arrows_count: " + arrows_count + "\n" +
-                "ticks_count: " + ticks_count+"\n";
-    }
-
     @Override
     public void castAbility() {
         if (arrows_count > 0) {
@@ -76,5 +47,30 @@ public class Hunter extends Player {
 
     }
 
+    @Override
+    public void on_GameTick() {
+        if (ticks_count == 10) {
+            arrows_count = arrows_count + getLevel();
+            ticks_count = 0;
+        }
+        else {
+            ticks_count = ticks_count + 1;
+        }
+    }
 
+    @Override
+    public void interact(Unit unit) {
+        unit.interact(this);
+    }
+
+    public void levelUp() {
+        super.levelUp();
+        arrows_count = arrows_count + (10 * getLevel());
+        setAttack_points(getAttack_points() + (2 * getLevel()));
+        setDefense_points(getDefense_points() + getLevel());
+    }
+
+    public String description(){
+        return super.description() + " Arrows: " + arrows_count;
+    }
 }

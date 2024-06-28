@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class Unit extends GameTile implements Visitor {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+public abstract class Unit extends GameTile implements Visitor{
     private String name;
     private Integer health_pool;
     private Integer current_health;
@@ -45,10 +50,6 @@ public abstract class Unit extends GameTile implements Visitor {
 
     public Integer getCurrent_health() {
         return current_health;
-=======
-    public Integer getHealth_amount() {
-        return health_amount;
-
     }
 
     public Integer getAttack_points() {
@@ -58,7 +59,6 @@ public abstract class Unit extends GameTile implements Visitor {
     public Integer getDefense_points() {
         return defense_points;
     }
-
 
     public static List<Enemy> getEnemyList() {
         return enemyList;

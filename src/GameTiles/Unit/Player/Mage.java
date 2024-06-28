@@ -9,12 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 
-public class Mage extends Player {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-
-import GameTiles.GameTile;
 public class Mage extends Player{
-
     private Integer mana_pool;
     private Integer current_mana;
     private Integer mana_cost;
@@ -22,40 +21,14 @@ public class Mage extends Player{
     private Integer hits_count;
     private Integer ability_range;
 
-
-    public  Mage(int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer mana_pool, Integer mana_cost, Integer spell_power, Integer hits_count, Integer ability_range) {
-        super(x,y, name, health_pool, attack_points, defense_points);
-    this.mana_pool=mana_pool;
-    this.current_mana=this.mana_pool/4;
-    this.mana_cost=mana_cost;
-    this.hits_count=hits_count;
-    this.ability_range=ability_range;
-    }
-
-    public void LevelUp() {
-        super.levelUp();
-        mana_pool=mana_pool+25*getLevel();
-        current_mana=Math.min(current_mana+mana_pool/4,mana_pool);
-        spell_power=spell_power+10*getLevel();
-    }
-
-    @Override
-    public void on_GameTick() {
-        current_mana = Math.min(mana_pool, current_mana + getLevel());
-    }
-    public void interact(Unit unit) {
-        unit.interact(this);
-
-    
-    public String description()
-    {
-        return super.description()+
-                "mana_pool: " + mana_pool + "\n" +
-                "current_mana: " + current_mana + "\n" +
-                "mana_cost: " + mana_cost + "\n" +
-                "spell_power: " + spell_power + "\n" +
-                "hits_count: " + hits_count + "\n" +
-                "ability_range: " + ability_range+"\n";
+    public Mage (int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer mana_pool, Integer mana_cost, Integer spell_power, Integer hits_count, Integer ability_range) {
+        super(x, y, name, health_pool, attack_points, defense_points);
+        this.mana_pool = mana_pool;
+        this.current_mana = (mana_pool / 4);
+        this.mana_cost = mana_cost;
+        this.spell_power = spell_power;
+        this.hits_count = hits_count;
+        this.ability_range = ability_range;
     }
 
     public void castAbility() {
@@ -80,6 +53,26 @@ public class Mage extends Player{
         else {
             manager.sendMessage(getName() + " tried to cast Blizzard, but there was not enough mana: " + current_mana + '/' + mana_cost);
         }
+    }
+
+    @Override
+    public void on_GameTick() {
+        current_mana = Math.min(mana_pool, current_mana + getLevel());
+    }
+
+    public void levelUp() {
+        super.levelUp();
+        mana_pool = mana_pool + (25 * getLevel());
+        current_mana = Math.min(current_mana + (mana_pool / 4), mana_pool);
+        spell_power = spell_power + (10 * getLevel());
+    }
+
+    public void interact(Unit unit) {
+        unit.interact(this);
+    }
+
+    public String description(){
+        return super.description() + ", Mana: " + current_mana +'/' + mana_pool + ", Spell power: " + spell_power;
     }
 
 }
