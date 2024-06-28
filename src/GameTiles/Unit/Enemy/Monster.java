@@ -11,8 +11,8 @@ public class Monster extends Enemy {
 
     private Integer vision_range;
 
-    public Monster(char tile, int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer vision_range, Integer experience_value) {
-        super(tile, x, y, name, health_pool, attack_points, defense_points, experience_value);
+    public Monster( String name, Integer health_pool,Integer health_amount, Integer attack_points, Integer defense_points, Integer vision_range,GameTile gameTile, Integer experience_value) {
+        super( name, health_pool, health_amount, attack_points, defense_points,gameTile, experience_value);
         this.vision_range = vision_range;
     }
 
@@ -22,28 +22,28 @@ public class Monster extends Enemy {
 
     public void move() {
         if (this.range(player) < (double) this.vision_range) {
-            int dx = this.getX() - player.getX();
-            int dy = this.getY() - player.getY();
+            int dx = this.getPosition().getX() - player.getPosition().getX();
+            int dy = this.getPosition().getY() - player.getPosition().getY();
             GameTile tile;
             if (Math.abs(dy) > Math.abs(dx)) {
                 if (dy > 0) {
-                    tile = board.getTile(getX(), getY() - 1); // move left
+                    tile = board.getTile(getPosition().getX(), getPosition().getY() - 1); // move left
                 } else {
-                    tile = board.getTile(getX(), getY() + 1); //move right
+                    tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
                 }
                 tile.accept(this);
             } else {
                 if (dx > 0) {
-                    tile = board.getTile(getX() - 1, getY());  //move up
+                    tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
                 } else {
-                    tile = board.getTile(getX() + 1, getY());  // move down
+                    tile = board.getTile(getPosition().getX() + 1, getPosition().getY());  // move down
                 }
                 tile.accept(this);
             }
         }
         else
         {
-            GameTile[] arr = {board.getTile(getX(), getY() - 1), board.getTile(getX(), getY() + 1), board.getTile(getX() - 1, getY()), board.getTile(getX() + 1, getY()), board.getTile(getX(), getY())};
+            GameTile[] arr = {board.getTile(getPosition().getX(), getPosition().getY() - 1), board.getTile(getPosition().getX(), getPosition().getY() + 1), board.getTile(getPosition().getX() - 1, getPosition().getY()), board.getTile(getPosition().getX() + 1, getPosition().getY()), board.getTile(getPosition().getX(), getPosition().getY())};
             Random r = new Random();
             int random_number = r.nextInt(5);
             GameTile tile1 = arr[random_number];
