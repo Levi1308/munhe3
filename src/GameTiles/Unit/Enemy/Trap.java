@@ -10,13 +10,12 @@ public class Trap extends Enemy{
     private char original_tile;
     private boolean visible;
 
-    public Trap(char tile, int x, int y, String name, Integer health_pool, Integer attack_points, Integer defense_points, Integer experience_value, int visibility_time, int invisibility_time) {
-        super(tile, x, y, name, health_pool, attack_points, defense_points, experience_value);
+    public Trap( String name, Integer health_pool,Integer health_amount, Integer attack_points, Integer defense_points,GameTile gameTile, Integer experience_value, int visibility_time, int invisibility_time) {
+        super(name, health_pool,health_amount, attack_points, defense_points,gameTile, experience_value);
         this.visible = true;
         this.tick_count = 0;
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
-        this.original_tile = tile;
     }
 
     public void setVisible(boolean bool){
@@ -29,10 +28,10 @@ public class Trap extends Enemy{
     public void on_GameTick() {
         this.visible = this.tick_count < this.visibility_time;////visible or not
         if (this.visible) {
-            this.setChar(this.original_tile);
+            this.setTile(this.original_tile);
         }
         else {
-            this.setChar('.');
+            this.setTile('.');
         }
 
         if (this.tick_count == this.visibility_time + this.invisibility_time) {///tick_count
