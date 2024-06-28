@@ -6,70 +6,59 @@ import GameTiles.Unit.Visitor;
 public abstract class GameTile implements Visited, Visitor {
 
     private char tile;
-    private int x;
-    private int y;
+    private Position position;
     protected static Board board;
-    protected static Manager manager;
+    //protected static Manager manager;
 
-    public GameTile(char tile, int x, int y) {
+    public GameTile(char tile, Position position) {
         this.tile = tile;
-        this.x = x;
-        this.y = y;
-        manager.addToTiles(this);
+        this.position=position;
+        //manager.addToTiles(this);
         board.addToBoard(this);
     }
 
     public void swapTiles(GameTile tile){
         board.swapTiles(this, tile);
-        int x1 = this.getX();
-        int y1 = this.getY();
-        int x2 = tile.getX();
-        int y2 = tile.getY();
-        this.setX(x2);
-        this.setY(y2);
-        tile.setX(x1);
-        tile.setY(y1);
+        int x1 = this.position.getX();
+        int y1 = this.position.getY();
+        int x2 = tile.position.getX();
+        int y2 = tile.position.getY();
+        this.position.setX(x2);
+        this.position.setY(y2);
+        tile.position.setX(x1);
+        tile.position.setY(y1);
 
     }
 
     public double range(GameTile tile) {
-        int x2 = tile.getX();
-        int y2 = tile.getY();
-        return Math.sqrt(Math.pow(x2 - x,2) + Math.pow(y2 - y,2));
+        int x2 = tile.position.getX();
+        int y2 = tile.position.getY();
+        return Math.sqrt(Math.pow(x2 - position.getX(),2) + Math.pow(y2 - position.getY(),2));
     }
 
-    public void setChar(char tile) {
+    public char getTile() {
+        return tile;
+    }
+
+    public void setTile(char tile) {
         this.tile = tile;
     }
-    public char getChar() {
-        return this.tile;
+
+    public Position getPosition() {
+        return position;
     }
 
-    public int getX() {
-        return this.x;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
-    public int getY() {
-        return this.y;
-    }
-
-    public void setX(int x1) {
-        this.x = x1;
-    }
-
-    public void setY(int y1) {
-        this.y = y1;
-    }
-
-    public String toString() {
-        return "" + tile;
+    public String StringTile() {
+        return tile+"";
     }
 
     public void accept(Visitor visitor){
         visitor.interact(this);
     }
 
-    public void setTile(char tile) {
-        this.tile = tile;
-    }
+
 }
