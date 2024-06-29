@@ -1,6 +1,7 @@
 package GameTiles.Unit;
 
 import GameTiles.GameTile;
+import GameTiles.Position;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Player.*;
 import GameTiles.Empty;
@@ -22,17 +23,16 @@ public abstract class Unit extends GameTile implements Visitor{
     private Integer health_amount;
     private Integer attack_points;
     private Integer defense_points;
-    private GameTile gameTile;
     protected static ArrayList<Enemy> enemyList = new ArrayList<>();
 
 
-    public Unit(String name, Integer health_pool,Integer health_amount, Integer attack_points, Integer defense_points, GameTile gameTile) {
+    public Unit(char tile, Position p,String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
+        super(tile,p);
         this.name = name;
         this.health_pool = health_pool;
         this.health_amount = health_amount;
         this.attack_points = attack_points;
         this.defense_points = defense_points;
-        this.gameTile=gameTile;
         //manager.setEnemies(enemyList);
     }
     public void setName(String name) {
@@ -44,7 +44,7 @@ public abstract class Unit extends GameTile implements Visitor{
     }
 
     public void setHealth_amount(Integer health_amount) {
-        this.health_amount = health_amount;
+        this.health_amount = Math.max(health_amount,0);
     }
 
     public void setAttack_points(Integer attack_points) {
@@ -52,18 +52,11 @@ public abstract class Unit extends GameTile implements Visitor{
     }
 
     public void setDefense_points(Integer defense_points) {
+
         this.defense_points = defense_points;
     }
 
-    public GameTile getGameTile() {
-        return gameTile;
-    }
-
-    public void setGameTile(GameTile gameTile) {
-        this.gameTile = gameTile;
-    }
-
-    public Integer getHealth_pool() {
+   public Integer getHealth_pool() {
         return health_pool;
     }
 
@@ -115,23 +108,22 @@ public abstract class Unit extends GameTile implements Visitor{
     }
 
     public void interact(Player player){
-        player.interact(this);
+        //this.interact(player);
     }
 
     public void interact(Enemy enemy){
-        enemy.interact(this);
-    }
 
-    public void interact(GameTile tile){
-        tile.interact(this);
+        //this.interact(enemy);
     }
 
     public void interact(Empty empty){
-        this.swapTiles(empty);
+
+        //this.swapTiles(empty);
     }
 
     public void interact(Wall wall){
-        wall.interact(this);
+
+        //wall.interact(this);
     }
 
     public boolean isDead(){
@@ -142,10 +134,24 @@ public abstract class Unit extends GameTile implements Visitor{
         List<Enemy> enemyList1 = enemyList;
         List<Enemy> enemyList3 = new ArrayList<>();
         for (Enemy e: enemyList1) {
-            if(e.range(this) < range) {
+            if(e.range(this) <= range) {
                 enemyList3.add(e);
             }
         }
         return enemyList3;
+    }
+    public Enemy NearestEnemy(List<Enemy> enemies)
+    {
+        Enemy closeEnemy=null;
+        double mindistance=100;//default number
+        for(Enemy enemy:enemies){
+            double distance=range(enemy);
+            if(distance<mindistance)
+            {
+                closeEnemy=enemy;
+                mindistance=distance;
+            }
+        }
+        return closeEnemy;
     }
 }

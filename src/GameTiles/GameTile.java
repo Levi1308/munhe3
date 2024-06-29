@@ -3,8 +3,8 @@ package GameTiles;
 import GameTiles.Unit.Visited;
 import GameTiles.Unit.Visitor;
 
-public abstract class GameTile implements Visited, Visitor {
-
+public abstract class GameTile implements  Visitor {
+    //Check if we need Visited
     private char tile;
     private Position position;
     protected static Board board;
@@ -56,9 +56,9 @@ public abstract class GameTile implements Visited, Visitor {
         return tile+"";
     }
 
-    public void accept(Visitor visitor){
+    /*public void accept(Visitor visitor){
         visitor.interact(this);
-    }
+    }*/
 
 
 }

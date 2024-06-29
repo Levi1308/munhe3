@@ -14,7 +14,9 @@ public abstract class Enemy extends Unit{
         this.experience_value = experience_value;
         addToEnemy(this);
     }
-
+    public int GetExperiance() {
+        return this.experience_value;
+    }
     public abstract void on_GameTick();
 
     /*public void interact(Player player){

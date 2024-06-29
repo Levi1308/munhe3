@@ -21,4 +21,6 @@ public class Manager {
     private String path;
 
     public Manager(){
+
     }
+}
