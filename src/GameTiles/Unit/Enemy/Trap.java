@@ -1,6 +1,7 @@
 package GameTiles.Unit.Enemy;
 
 import GameTiles.GameTile;
+import GameTiles.Position;
 import GameTiles.Unit.Unit;
 
 public class Trap extends Enemy{
@@ -10,8 +11,8 @@ public class Trap extends Enemy{
     private char original_tile;
     private boolean visible;
 
-    public Trap( String name, Integer health_pool,Integer health_amount, Integer attack_points, Integer defense_points,GameTile gameTile, Integer experience_value, int visibility_time, int invisibility_time) {
-        super(name, health_pool,health_amount, attack_points, defense_points,gameTile, experience_value);
+    public Trap(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer experience_value, int visibility_time, int invisibility_time) {
+        super(tile, p, name, health_pool,health_amount, attack_points, defense_points, experience_value);
         this.visible = true;
         this.tick_count = 0;
         this.visibility_time = visibility_time;
@@ -21,8 +22,6 @@ public class Trap extends Enemy{
     public void setVisible(boolean bool){
         visible = bool;
     }
-
-
 
     @Override
     public void on_GameTick() {
