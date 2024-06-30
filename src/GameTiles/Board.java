@@ -9,10 +9,10 @@ public class Board {
     }
 
     public void swapTiles(GameTile t1, GameTile t2) {
-        int t1x = t1.getX();
-        int t1y = t1.getY();
-        int t2x = t2.getX();
-        int t2y = t2.getY();
+        int t1x = t1.getPosition().getX();
+        int t1y = t1.getPosition().getY();
+        int t2x = t2.getPosition().getX();
+        int t2y = t2.getPosition().getY();
         gameTiles[t1x][t1y] = t2;
         gameTiles[t2x][t2y] = t1;
     }
@@ -29,13 +29,13 @@ public class Board {
     }
 
     public void replaceTile(GameTile tile){
-        int x = tile.getX();
-        int y = tile.getY();
+        int x = tile.getPosition().getX();
+        int y = tile.getPosition().getY();
         gameTiles[x][y] = tile;
     }
 
     public void addToBoard(GameTile tile){
-        gameTiles[tile.getX()][tile.getY()] = tile;
+        gameTiles[tile.getPosition().getX()][tile.getPosition().getY()] = tile;
     }
 
 }

@@ -1,5 +1,6 @@
 package GameTiles;
 
+
 public class Position {
     private Integer x;
     private Integer y;
@@ -25,3 +26,4 @@ public class Position {
         this.y = y;
     }
 }
+

@@ -1,15 +1,11 @@
 package GameTiles;
+import GameTiles.Unit.Enemy.Enemy;
+import GameTiles.Unit.Player.Player;
 import GameTiles.Unit.Unit;
 
-public class Wall extends GameTiles{
+public class Wall extends GameTile{
     public Wall (int x, int y){
-        super('#', x, y);
-    }
-
-    public void interact(GameTiles tile){
-    }
-
-    public void interact(Unit unit) {
+        super('#', new Position(x,y));
     }
 
     public void interact(Empty empty) {
@@ -17,6 +13,16 @@ public class Wall extends GameTiles{
     }
 
     public void interact(Wall wall) {
+
+    }
+
+    @Override
+    public void interact(Enemy enemy) {
+
+    }
+
+    @Override
+    public void interact(Player player) {
 
     }
 }

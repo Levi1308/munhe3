@@ -1,60 +1,78 @@
 package GameTiles.Unit.Player;
 
 
+import GameTiles.Empty;
+import GameTiles.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.Enemy;
 import java.util.List;
 
 import GameTiles.GameTile;
+import GameTiles.Wall;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Rouge extends Player{
     private Integer cost;
     private Integer current_energy=100;
-
-
-    public Rouge(int x, int y, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
-        super(x,y,name, health_pool, attack_points, defense_points);
-    this.cost=cost;
+    public Rouge(char tile, Position p,String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points
+            , GameTile gameTile, Integer cost ) {
+        super(tile, p,name, health_pool, health_amount, attack_points, defense_points);
+        this.cost=cost;
     }
 
-    public void LevelUp() {
+    @Override
+    public void levelUp() {
         super.levelUp();
         current_energy=100;
         setAttack_points(getAttack_points()+3*getLevel());
     }
-    @Override
-    public void On_GameTick()
+    public void OnGameTick()
     {
         current_energy=Math.min(current_energy+10,10100);
     }
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
-
-   
-
-    
     public String description()
     {
         return super.description()+
                 "cost: " + cost + "\n" +
                 "current_energy: " + current_energy+"\n";
     }
-
+    @Override
     public void castAbility() {
-        if (current_energy > cost) {
-            manager.sendMessage(getName() + " used Fan of Knives");
-            current_energy = current_energy - cost;
-            List<Enemy> enemies_inRange = enemyList_byRange(2);
-            for (Enemy e : enemies_inRange){
-                int defense = e.random_Defense();
-                manager.sendMessage(getName() + " attacked " + e.getName() + " for " + (getAttack_points() - defense) + " ability damage.");
-                e.lose_health(getAttack_points() - defense);
+        if (current_energy >= cost) {
+            current_energy -= cost;
+            List<Enemy> enemies = this.enemyList_byRange(2);
+            for (Enemy enemy : enemies) {
+                int lost=this.getAttack_points()-enemy.getDefense_points();
+                if(lost>0)
+                {
+                    enemy.setHealth_amount(enemy.getHealth_amount()-lost);
+                    if(enemy.isDead())
+                    {
+                        this.addExp(enemy.GetExperiance());
+                        enemy.setTile('.');
+                    }
+                }
             }
-        }
-        else {
-            manager.sendMessage(getName() + " tried to cast Fan of Knives, but there was not enough energy: " + current_energy + '/' + cost);
+        } else {
+            //add response
         }
     }
-
+    @Override
+    public void interact(Enemy enemy) {
+        this.Battle(enemy);
+    }
+    @Override
+    public void interact(Player player) {
+//undefined
+    }
+    @Override
+    public void interact(Empty empty) {
+    this.swapTiles(empty);
+    }
+    @Override
+    public void interact(Wall wall) {
+        wall.interact(this);
+    }
 }
