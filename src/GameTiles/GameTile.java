@@ -8,12 +8,12 @@ public abstract class GameTile implements  Visitor {
     private char tile;
     private Position position;
     protected static Board board;
-    //protected static Manager manager;
+    protected static Manager manager;
 
     public GameTile(char tile, Position position) {
         this.tile = tile;
         this.position=position;
-        //manager.addToTiles(this);
+        manager.addToTiles(this);
         board.addToBoard(this);
     }
 
