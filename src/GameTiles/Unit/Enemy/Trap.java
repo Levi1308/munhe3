@@ -45,15 +45,7 @@ public class Trap extends Enemy{
         }
     }
 
-    public void interact(GameTile tile) {
-
-    }
-
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
-
-
+    public void interact(GameTile tile) {}
 
     public Boolean getVisible() {
         return visible;
