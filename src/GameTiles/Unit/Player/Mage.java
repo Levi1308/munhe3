@@ -1,18 +1,10 @@
 package GameTiles.Unit.Player;
 
 import GameTiles.Empty;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.Enemy;
-import GameTiles.GameTile;
-import GameTiles.Unit.Unit;
-import GameTiles.Unit.Player.Player;
 import GameTiles.Wall;
 
-import java.util.List;
-import java.util.Random;
-
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,8 +35,8 @@ public class Mage extends Player{
         current_mana=Math.min(current_mana+mana_pool/4,mana_pool);
         spell_power=spell_power+10*getLevel();
     }
-
-    public void OnGameTick()
+    @Override
+    public void onGameTick()
     {
         current_mana=current_mana-mana_cost;
     }

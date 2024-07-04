@@ -1,7 +1,7 @@
 package GameTiles;
 import GameTiles.Unit.Enemy.Enemy;
 import GameTiles.Unit.Player.Player;
-import GameTiles.Unit.Unit;
+import GameTiles.Utilis.Position;
 
 public class Wall extends GameTile{
     public Wall (Position p){

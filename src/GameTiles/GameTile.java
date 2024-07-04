@@ -1,14 +1,16 @@
 
 package GameTiles;
-import GameTiles.Unit.Visited;
+import GameTiles.Utilis.Board;
+import GameTiles.Utilis.Position;
+import UI.Manager;
 import GameTiles.Unit.Visitor;
 
 public abstract class GameTile implements  Visitor {
     //Check if we need Visited
     private char tile;
     private Position position;
-    protected static Board board;
-    protected static Manager manager;
+    public static Board board;
+    public static Manager manager;
 
     public GameTile(char tile, Position position) {
         this.tile = tile;

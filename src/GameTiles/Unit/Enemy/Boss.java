@@ -2,8 +2,7 @@ package GameTiles.Unit.Enemy;
 
 import java.util.Random;
 
-import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.HeroicUnit;
 
 

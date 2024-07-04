@@ -1,4 +1,6 @@
-package GameTiles;
+package UI;
+
+import GameTiles.Utilis.Board;
 
 import java.util.Scanner;
 

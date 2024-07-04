@@ -1,7 +1,7 @@
 package GameTiles.Unit;
 
 import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Player.*;
 import GameTiles.Empty;
@@ -11,11 +11,6 @@ import GameTiles.Wall;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public abstract class Unit extends GameTile implements Visitor{
     private String name;

@@ -2,11 +2,7 @@ package GameTiles.Unit.Enemy;
 
 import java.util.Random;
 import GameTiles.GameTile;
-import GameTiles.Position;
-import GameTiles.Unit.Unit;
-
-
-import java.util.Random;
+import GameTiles.Utilis.Position;
 
 public class Monster extends Enemy {
 
@@ -32,14 +28,14 @@ public class Monster extends Enemy {
                 } else {
                     tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
                 }
-                tile.accept(this);
+                //tile.accept(this);
             } else {
                 if (dx > 0) {
                     tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
                 } else {
                     tile = board.getTile(getPosition().getX() + 1, getPosition().getY());  // move down
                 }
-                tile.accept(this);
+                //tile.accept(this);
             }
         }
         else
@@ -48,7 +44,7 @@ public class Monster extends Enemy {
             Random r = new Random();
             int random_number = r.nextInt(5);
             GameTile tile1 = arr[random_number];
-            tile1.accept(this);
+            //tile1.accept(this);
         }
     }
 

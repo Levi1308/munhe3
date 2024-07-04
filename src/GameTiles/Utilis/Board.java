@@ -1,4 +1,6 @@
-package GameTiles;
+package GameTiles.Utilis;
+
+import GameTiles.GameTile;
 
 public class Board {
     private GameTile[][] gameTiles;

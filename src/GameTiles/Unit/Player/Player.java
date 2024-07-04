@@ -3,16 +3,13 @@ package GameTiles.Unit.Player;
 
 
 import GameTiles.Empty;
-import GameTiles.Position;
+import GameTiles.GameTile;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Visited;
-import GameTiles.GameTile;
-import GameTiles.Manager.*;
 import GameTiles.Unit.HeroicUnit;
 import GameTiles.Wall;
-
-import java.util.Random;
 
 
 public abstract class Player extends Unit implements HeroicUnit{
@@ -99,22 +96,22 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     public void moveUp() {
-        Visited tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
+        Visited tile = (Visited) board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
         tile.accept(this);
     }
 
     public void moveDown() {
-        Visited tile = board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
+        Visited tile = (Visited) board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
         tile.accept(this);
     }
 
     public void moveLeft() {
-        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
+        Visited tile = (Visited) board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
         tile.accept(this);
     }
 
     public void moveRight() {
-        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
+        Visited tile = (Visited) board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
     }
 }

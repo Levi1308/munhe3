@@ -1,11 +1,9 @@
 package GameTiles.Unit.Enemy;
 
 
-import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Player.Player;
-import GameTiles.Manager;
 
 
 public abstract class Enemy extends Unit{

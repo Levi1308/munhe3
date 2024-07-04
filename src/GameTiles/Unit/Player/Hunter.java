@@ -1,16 +1,12 @@
 package GameTiles.Unit.Player;
 
 import GameTiles.Empty;
-import GameTiles.GameTile;
 
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.Enemy;
 import java.util.List;
 
-import GameTiles.Unit.Unit;
 import GameTiles.Wall;
-
-import java.util.List;
 
 public class Hunter extends Player {
     private Integer range;
@@ -30,7 +26,8 @@ public class Hunter extends Player {
         setAttack_points(getAttack_points()+2*getLevel());
         setDefense_points(getDefense_points()+getLevel());
     }
-    public void OnGameTick()
+    @Override
+    public void onGameTick()
     {
         if(ticks_count==10)
         {

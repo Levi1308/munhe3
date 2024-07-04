@@ -1,8 +1,7 @@
 package GameTiles.Unit.Enemy;
 
 import GameTiles.GameTile;
-import GameTiles.Position;
-import GameTiles.Unit.Unit;
+import GameTiles.Utilis.Position;
 
 public class Trap extends Enemy{
     private int visibility_time;

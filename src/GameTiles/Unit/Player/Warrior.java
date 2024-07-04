@@ -1,21 +1,13 @@
 package GameTiles.Unit.Player;
 
 import GameTiles.Empty;
-import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.Enemy;
 
-import GameTiles.Unit.Unit;
 import GameTiles.Wall;
 
 import java.util.List;
 import java.util.Random;
-
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class Warrior extends Player {
     public Integer ability_cooldown;
@@ -34,7 +26,8 @@ public class Warrior extends Player {
         setDefense_points(getDefense_points() + getLevel());
     }
 
-    public void OnGameTick() {
+    @Override
+    public void onGameTick() {
         remaining_cooldown--;
     }
 

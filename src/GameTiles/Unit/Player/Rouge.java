@@ -2,16 +2,11 @@ package GameTiles.Unit.Player;
 
 
 import GameTiles.Empty;
-import GameTiles.Position;
-import GameTiles.Unit.Unit;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.Enemy;
 import java.util.List;
 
-import GameTiles.GameTile;
 import GameTiles.Wall;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rouge extends Player{
     private Integer cost;
@@ -28,7 +23,8 @@ public class Rouge extends Player{
         current_energy=100;
         setAttack_points(getAttack_points()+3*getLevel());
     }
-    public void OnGameTick()
+    @Override
+    public void onGameTick()
     {
         current_energy=Math.min(current_energy+10,10100);
     }

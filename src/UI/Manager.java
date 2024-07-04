@@ -1,14 +1,13 @@
-package GameTiles;
+package UI;
 
+import GameTiles.*;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Enemy.Monster;
 import GameTiles.Unit.Player.*;
 import GameTiles.Unit.Enemy.Enemy;
 import GameTiles.Unit.Player.Rouge;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import GameTiles.Utilis.Board;
+import GameTiles.Utilis.Position;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -129,50 +128,51 @@ public class Manager {
             }
             cli.printBoard();
         } catch (FileNotFoundException var15) {
-            this.sendMessage("You win!");
+            this.sendMessage("Uploading failed");
             this.is_GameOver();
         }
     }
     private void player_list() {
         sendMessage("");
         sendMessage("Warriors:");
-        sendMessage("1. John Snow, Health: 300/300, Attack: 30, Defense: 4, Level: 1, Experience: 0/50, Cooldown: 0/3");
-        sendMessage("2. The Hound, Health: 400/400, Attack: 20, Defense: 6, Level: 1, Experience: 0/50, Cooldown: 0/5");
+        sendMessage("1. John Snow, Health: 300, Attack: 30, Defense: 4, Experience: 0/50, Cooldown: 0/3");
+        sendMessage("2. The Hound, Health: 400, Attack: 20, Defense: 6, Experience: 0/50, Cooldown: 0/5");
         sendMessage("");
         sendMessage("Mages:");
-        sendMessage("3. Melisandre, Health: 100/100, Attack: 5, Defense: 1, Level: 1, Experience: 0/50, Mana: 75/300, Spell Power: 15");
-        sendMessage("4. Thoros of Myr, Health: 250/250, Attack: 25, Defense: 4, Level: 1, Experience: 0/50, Mana: 37/150, Spell Power: 20");
+        sendMessage("3. Melisandre, Health: 100, Attack: 5, Defense: 1, Experience: 0/50, Mana Pool: 300,Mana cost: 30, Spell Power: 15, Hit count: 5, Range: 6");
+        sendMessage("4. Thoros of Myr, Health: 250, Attack: 25, Defense: 4, Experience: 0/50, Mana Pool: 150,Mana cost: 20, Spell Power: 20, Hit count: 3, Range: 4");
         sendMessage("");
         sendMessage("Rogues:");
-        sendMessage("5. Arya stark, Health: 150/150, Attack: 40, Defense: 2, Level: 1, Experience: 50, Energy: 100");
-        sendMessage("6. Bronn, Health: 250/250, Attack: 35, Defense: 3, Level: 1, Experience: 50, Energy: 100");
+        sendMessage("5. Arya stark, Health: 150, Attack: 40, Defense: 2, Cost: 20, Experience: 50, Energy: 100");
+        sendMessage("6. Bronn, Health: 250, Attack: 35, Defense: 3, Cost:50, Experience: 50, Energy: 100");
         sendMessage("");
         sendMessage("Hunter:");
-        sendMessage("7. Ygritte, Health: 220/220, Attack: 30, Defense: 2, Level: 1, Experience: 50, Range: 6");
+        sendMessage("7. Ygritte, Health: 220, Attack: 30, Defense: 2, Experience: 50, Range: 6");
     }
 
 
     public void create_player(char c, Position p){
         if (c == '1'){
-            new Warrior('@',p, "John Snow", 300, 30, 4, 3);
+           this.player= new Warrior('@',p, "John Snow", 300, 30, 4, 3);
+
         }
         else if (c == '2'){
-            new Warrior('@', p, "The Hound", 400, 20, 6, 5);
+            this.player=  new Warrior('@', p, "The Hound", 400, 20, 6, 5);
         }
         else if(c == '3'){
-            new Mage('@',p, "Melisandre", 100, 5, 1, 300, 30, 15,5, 6 );
+            this.player= new Mage('@',p, "Melisandre", 100, 5, 1, 300, 30, 15,5, 6 );
         }
         else if (c == '4'){
-            new Mage('@',p, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4);
+            this.player= new Mage('@',p, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4);
         }
         else if (c == '5'){
-            new Rouge('@',p, "Arya Stark", 150, 40, 2, 20, 20);
+            this.player= new Rouge('@',p, "Arya Stark", 150, 40, 2, 20, 20);
         }
         else if (c == '6'){
-            new Rouge('@', p, "Bronn", 250, 35, 3, 50, 50);
+            this.player= new Rouge('@', p, "Bronn", 250, 35, 3, 50, 50);
         }
         else if (c == '7'){
-            new Hunter('@',p, "Ygritte", 220, 30, 30, 2, 6,1);
+            this.player= new Hunter('@',p, "Ygritte", 220, 30, 30, 2, 6,1);
         }
     }
 
