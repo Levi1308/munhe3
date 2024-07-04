@@ -46,6 +46,11 @@ public class Manager {
     public void addToTiles(GameTile tile){
         tiles.add(tile);
     }
+    public void onGameTick(){
+        player.onGameTick();
+        sendMessage(player.description());
+        cli.printBoard();
+    }
 
 
 
@@ -74,24 +79,21 @@ public class Manager {
         gameOver = true;
     }
 
-    /*public void acceptInput(char c){
+    public void acceptInput(char c) {
         if (c == 'e') {
             player.castAbility();
-        }
-        else {
-            if (c == 'w'){
+        } else {
+            if (c == 'w') {
                 player.moveUp();
-            }
-            else if (c == 's'){
+            } else if (c == 's') {
                 player.moveDown();
-            }
-            else if (c == 'a'){
+            } else if (c == 'a') {
                 player.moveLeft();
-            }
-            else if (c == 'd'){
+            } else if (c == 'd') {
                 player.moveRight();
             }
-        }*/
+        }
+    }
 
     public void readFile(String path) throws FileNotFoundException {
         try {
@@ -113,18 +115,17 @@ public class Manager {
             this.board = new Board(a, b);
             this.cli.setBoard(this.board);
 
-            int x = 0;
-            int y = 0;
+            Position p =new Position(0,0);
             File nextLevel = new File(path + "\\level" + gameLevel + ".txt");
             Scanner scanner = new Scanner(nextLevel);
             while (scanner.hasNextLine()) {
                 char[] chars = scanner.nextLine().toCharArray();
                 for (char c : chars) {
-                    initializer(c, x, y);
-                    y += 1;
+                    initializer(c, p);
+                    p.setY(p.getY()+1) ;
                 }
-                y = 0;
-                x += 1;
+                p.setY(0);
+                p.setX(p.getX()+1);
             }
             cli.printBoard();
         } catch (FileNotFoundException var15) {
@@ -245,6 +246,15 @@ public class Manager {
             readFile(this.path);
         } catch (FileNotFoundException e) {
             sendMessage("You win!");
+        }
+    }
+    public void runGame() {
+        while (!gameOver){
+            this.cli.acceptInput();
+            for (Enemy e: enemies){
+                e.on_GameTick();
+            }
+            this.onGameTick();
         }
     }
 }
