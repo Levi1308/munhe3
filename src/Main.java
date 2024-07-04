@@ -1,5 +1,11 @@
+import java.io.FileNotFoundException;
+import GameTiles.Manager;
+
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+    public static void main(String[] args) throws FileNotFoundException {
+        Manager manager = new Manager();
+        manager.readFile(args[0]);
+        manager.readFile("C:\\Users\\tomer\\Desktop\\levels_dir");
+        manager.runGame();
     }
 }
