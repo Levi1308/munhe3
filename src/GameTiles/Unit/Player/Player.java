@@ -31,6 +31,7 @@ public abstract class Player extends Unit implements HeroicUnit{
         setAttack_points(getAttack_points()+4*level);
         setDefense_points(getDefense_points()+level);
     }
+    public abstract void onGameTick();
     public Integer getLevel() {
         return level;
     }
@@ -97,7 +98,7 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-   /* public void moveUp() {
+    public void moveUp() {
         Visited tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
         tile.accept(this);
     }
@@ -115,6 +116,6 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void moveRight() {
         Visited tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
-    }*/
+    }
 }
 
