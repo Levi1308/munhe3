@@ -22,6 +22,7 @@ public abstract class Enemy extends Unit{
     }
     public abstract void on_GameTick();
 
+
     public void interact(Player player){
         manager.sendMessage(getName() + " engaged in combat with " + player.getName() + '.');
         int rand_att = random_Attack();
