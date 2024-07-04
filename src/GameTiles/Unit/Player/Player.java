@@ -8,7 +8,7 @@ import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Visited;
 import GameTiles.GameTile;
-
+import GameTiles.Manager.*;
 import GameTiles.Unit.HeroicUnit;
 import GameTiles.Wall;
 
@@ -63,9 +63,7 @@ public abstract class Player extends Unit implements HeroicUnit{
         this.Battle(enemy);
     }
     @Override
-    public void interact(Player player) {
-//undefined
-    }
+    public void interact(Player player) {}
     @Override
     public void interact(Empty empty) {
         this.swapTiles(empty);
@@ -88,21 +86,9 @@ public abstract class Player extends Unit implements HeroicUnit{
             }
         }
     }
-    /*protected void battle(Enemy enemy){
-        manager.sendMessage(getName() + " engaged in combat with " + enemy.getName() + '.');
-        int rand_att = random_Attack();
-        int rand_def = enemy.random_Defense();
-        if (rand_att - rand_def > 0){
-            manager.sendMessage(getName() + " dealt " + (rand_att-rand_def) + " damage to " + enemy.getName() +".");
-            enemy.lose_health(rand_att-rand_def);
-        }
-        else {
-            manager.sendMessage(getName() + " dealt " + 0 + " to " + enemy.getName() + ".");
-        }
-        manager.sendMessage(enemy.description());
-    */}
 
-    /*public void lose_health(int damage){
+
+    public void lose_health(int damage){
         setHealth_amount(getHealth_amount() - damage);
         if (isDead()) {
             setTile('X');
@@ -111,31 +97,24 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-    /*public void interact(Enemy enemy){
-        this.battle(enemy);
-    }
-
-
-    /*public void interact(Player player){}
-
-    public void moveUp() {
-        Visited tile = board.getTile(getX() - 1, getY());  //move up
+   /* public void moveUp() {
+        Visited tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
         tile.accept(this);
     }
 
     public void moveDown() {
-        Visited tile = board.getTile(getX() + 1, getY());  //move down
+        Visited tile = board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
         tile.accept(this);
     }
 
     public void moveLeft() {
-        Visited tile = board.getTile(getX(), getY() - 1); //move left
+        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
         tile.accept(this);
     }
 
     public void moveRight() {
-        Visited tile = board.getTile(getX(), getY() + 1); //move right
+        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
-    }
-}*/
+    }*/
+}
 

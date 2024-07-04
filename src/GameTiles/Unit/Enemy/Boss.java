@@ -3,6 +3,7 @@ package GameTiles.Unit.Enemy;
 import java.util.Random;
 
 import GameTiles.GameTile;
+import GameTiles.Position;
 import GameTiles.Unit.HeroicUnit;
 
 
@@ -10,8 +11,8 @@ public class Boss extends Monster implements HeroicUnit{
     private int ability_frequency;
     private int combat_tick;
 
-    public Boss(String name, int health_pool, int health_amount, int attack_points, int defense_points, int experience, GameTile gameTile, int vision_range, int ability_frequency){
-        super(name, health_pool,health_amount, attack_points, defense_points, vision_range,gameTile,  experience);
+    public Boss(char tile, Position p,String name, int health_pool, int health_amount, int attack_points, int defense_points, int experience, int vision_range, int ability_frequency){
+        super(tile, p, name, health_pool,health_amount, attack_points, defense_points, vision_range, experience);
         this.ability_frequency = ability_frequency;
         this.combat_tick = 0;
     }
@@ -35,7 +36,7 @@ public class Boss extends Monster implements HeroicUnit{
         }
     }
 
-    /*@Override
+    @Override
     public void castAbility() {
         Random random = new Random();
         int defense = random.nextInt(player.getDefense_points());
@@ -48,6 +49,6 @@ public class Boss extends Monster implements HeroicUnit{
         else {
             manager.sendMessage(getName() + " shot " + player.getName() + ", dealing 0" + " ability damage.");
         }
-    */}
+    }
 }
 

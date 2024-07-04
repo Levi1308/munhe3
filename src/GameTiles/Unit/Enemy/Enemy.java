@@ -2,15 +2,18 @@ package GameTiles.Unit.Enemy;
 
 
 import GameTiles.GameTile;
+import GameTiles.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Player.Player;
+import GameTiles.Manager;
+
 
 public abstract class Enemy extends Unit{
     private Integer experience_value;
     public static Player player;
 
-    public Enemy(String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, GameTile gameTile,Integer experience_value ) {
-        super(name, health_pool,health_amount, attack_points, defense_points, gameTile);
+    public Enemy(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer experience_value ) {
+        super(tile, p, name, health_pool,health_amount, attack_points, defense_points);
         this.experience_value = experience_value;
         addToEnemy(this);
     }
@@ -19,7 +22,7 @@ public abstract class Enemy extends Unit{
     }
     public abstract void on_GameTick();
 
-    /*public void interact(Player player){
+    public void interact(Player player){
         manager.sendMessage(getName() + " engaged in combat with " + player.getName() + '.');
         int rand_att = random_Attack();
         int rand_def = player.random_Defense();
@@ -31,11 +34,11 @@ public abstract class Enemy extends Unit{
             manager.sendMessage(getName() + " dealt " + 0 + " to " + player.getName() + ".");
         }
         manager.sendMessage(description());
-    */}
+    }
 
-    ///public void interact(Enemy enemy){}
+    public void interact(Enemy enemy){}
 
-   /* public void lose_health(int num){
+    public void lose_health(int num){
         this.setHealth_amount(getHealth_amount() - num);
         if (isDead()){
             player.swapTiles(this);
@@ -43,6 +46,6 @@ public abstract class Enemy extends Unit{
             player.addExp(this.experience_value);
             manager.removeEnemy(this);
         }
-    }*/
+    }
 
 }

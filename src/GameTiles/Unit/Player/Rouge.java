@@ -16,8 +16,8 @@ import java.util.List;
 public class Rouge extends Player{
     private Integer cost;
     private Integer current_energy=100;
-    public Rouge(char tile, Position p,String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points
-            , GameTile gameTile, Integer cost ) {
+    public Rouge(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points
+            , Integer cost ) {
         super(tile, p,name, health_pool, health_amount, attack_points, defense_points);
         this.cost=cost;
     }

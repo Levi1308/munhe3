@@ -4,8 +4,8 @@ import GameTiles.Unit.Player.Player;
 import GameTiles.Unit.Unit;
 
 public class Wall extends GameTile{
-    public Wall (int x, int y){
-        super('#', new Position(x,y));
+    public Wall (Position p){
+        super('#', p);
     }
 
     public void interact(Empty empty) {

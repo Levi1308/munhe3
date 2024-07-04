@@ -2,6 +2,7 @@ package GameTiles.Unit.Enemy;
 
 import java.util.Random;
 import GameTiles.GameTile;
+import GameTiles.Position;
 import GameTiles.Unit.Unit;
 
 
@@ -11,8 +12,8 @@ public class Monster extends Enemy {
 
     private Integer vision_range;
 
-    public Monster( String name, Integer health_pool,Integer health_amount, Integer attack_points, Integer defense_points, Integer vision_range,GameTile gameTile, Integer experience_value) {
-        super( name, health_pool, health_amount, attack_points, defense_points,gameTile, experience_value);
+    public Monster(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer vision_range, Integer experience_value) {
+        super(tile, p, name, health_pool, health_amount, attack_points, defense_points, experience_value);
         this.vision_range = vision_range;
     }
 

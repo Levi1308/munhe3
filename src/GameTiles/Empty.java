@@ -7,8 +7,9 @@ import GameTiles.Unit.Unit;
 
 
 public class Empty extends GameTile {
-    public Empty(int x, int y) {
-        super('.',new Position(x,y));
+
+    public Empty(Position p) {
+        super('.',p);
     }
 
     public void interact(Unit unit){this.swapTiles(unit);}

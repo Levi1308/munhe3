@@ -11,4 +11,5 @@ public interface Visitor {
     public void interact(Wall wall);
     public void interact(Enemy enemy);
     public void interact(Player player);
+    public void interact(GameTile gameTile);
  }
