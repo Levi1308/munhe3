@@ -60,9 +60,5 @@ public class Monster extends Enemy {
         tile.interact(this);
     }
 
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
-
     public void interact(Enemy enemy){}
 }
