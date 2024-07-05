@@ -16,7 +16,7 @@ public class Mage extends Player{
     private Integer hits_count;
     private Integer ability_range;
     public  Mage(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points
-            , Integer manaPool, Integer mana_cost, Integer hits_count,
+            , Integer manaPool, Integer mana_cost,Integer spellPower, Integer hits_count,
                  Integer ability_range) {
         super(tile,p,name, health_pool, health_amount, attack_points, defense_points);
         this.mana_pool=manaPool;
@@ -24,7 +24,7 @@ public class Mage extends Player{
         this.mana_cost=mana_cost;
         this.hits_count=hits_count;
         this.ability_range=ability_range;
-
+        this.spell_power=spellPower;
 
     }
 
@@ -42,7 +42,7 @@ public class Mage extends Player{
     }
     public String description()
     {
-        return super.description()+
+        return super.description()+"\n"+
                 "mana_pool: " + mana_pool + "\n" +
                 "current_mana: " + current_mana + "\n" +
                 "mana_cost: " + mana_cost + "\n" +

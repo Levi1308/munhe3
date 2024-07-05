@@ -15,7 +15,9 @@ public class Wall extends GameTile{
     public void interact(Wall wall) {
 
     }
-
+    public void interact(GameTile tile) {
+        tile.interact(this);
+    }
     @Override
     public void interact(Enemy enemy) {
 

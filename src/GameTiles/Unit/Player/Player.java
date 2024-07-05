@@ -70,6 +70,9 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void interact(Wall wall) {
         wall.interact(this);
     }
+    public void interact(GameTile tile) {
+        tile.interact(this);
+    }
     public void Battle(Enemy enemy){
         int attack=random_Attack();
         int defence=random_Defense();
@@ -96,22 +99,22 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     public void moveUp() {
-        Visited tile = (Visited) board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
+        Visited tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
         tile.accept(this);
     }
 
     public void moveDown() {
-        Visited tile = (Visited) board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
+        Visited tile =  board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
         tile.accept(this);
     }
 
     public void moveLeft() {
-        Visited tile = (Visited) board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
+        Visited tile =  board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
         tile.accept(this);
     }
 
     public void moveRight() {
-        Visited tile = (Visited) board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
+        Visited tile =  board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
     }
 }

@@ -120,7 +120,9 @@ public abstract class Unit extends GameTile implements Visitor{
 
         //wall.interact(this);
     }
-
+    public void interact(GameTile tile) {
+        tile.interact(this);
+    }
     public boolean isDead(){
         return health_amount <= 0;
     }

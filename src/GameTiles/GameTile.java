@@ -1,12 +1,13 @@
 
 package GameTiles;
+import GameTiles.Unit.Visited;
 import GameTiles.Utilis.Board;
 import GameTiles.Utilis.Position;
 import UI.Manager;
 import GameTiles.Unit.Visitor;
 
-public abstract class GameTile implements  Visitor {
-    //Check if we need Visited
+public abstract class GameTile implements  Visitor, Visited {
+
     private char tile;
     private Position position;
     public static Board board;
@@ -58,9 +59,12 @@ public abstract class GameTile implements  Visitor {
         return tile+"";
     }
 
-    /*public void accept(Visitor visitor){
+    public void accept(Visitor visitor){
         visitor.interact(this);
-    }*/
+    }
 
-
+    @Override
+    public String toString() {
+        return tile+"   "+position.getX()+","+ position.getY();
+    }
 }

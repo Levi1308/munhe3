@@ -11,10 +11,12 @@ import java.util.Random;
 
 public class Warrior extends Player {
     public Integer ability_cooldown;
-    public Integer remaining_cooldown = 0;
+    public Integer remaining_cooldown ;
 
-    public Warrior(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
+    public Warrior(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points,Integer ability_cooldown) {
         super(tile, p, name, health_pool, health_amount, attack_points, defense_points);
+        this.ability_cooldown=ability_cooldown;
+        this.remaining_cooldown=0;
     }
 
     @Override

@@ -26,6 +26,7 @@ public class Manager {
 
     public Manager(){
         CLI cli = new CLI(this);
+        enemies=new ArrayList<>();
         tiles = new ArrayList<>();
         GameTile.manager = this;
     }
@@ -97,36 +98,49 @@ public class Manager {
     public void readFile(String path) throws FileNotFoundException {
         try {
             this.path = path;
+            // Create a File object for the next level
             File nextBoard = new File(path + "\\level" + this.gameLevel + ".txt");
             Scanner readLines = new Scanner(nextBoard);
-            int a = 0;
-            int b = 0;
-            readLines.useDelimiter("");
+            int a = 0; // Number of lines (rows)
+            int b = 0; // Number of columns
+            readLines.useDelimiter(""); // Set the delimiter to read individual characters
 
+            // Count the number of columns (b) by reading until a newline is encountered
             while (readLines.hasNext() && readLines.next().equals("#")) {
                 b++;
             }
 
+            // Count the number of rows (a) by reading each line
             while (readLines.hasNextLine()) {
                 a++;
                 readLines.nextLine();
             }
+            readLines.close(); // Close the first scanner
+
+            // Initialize the board with the determined dimensions
             this.board = new Board(a, b);
             this.cli.setBoard(this.board);
 
-            Position p =new Position(0,0);
+            // Reset the position for placing elements on the board
+            Position p = new Position(0, 0);
+            // Create another File object for the same level (to re-read)
             File nextLevel = new File(path + "\\level" + gameLevel + ".txt");
             Scanner scanner = new Scanner(nextLevel);
+
+            // Read the file line by line and initialize the board
             while (scanner.hasNextLine()) {
                 char[] chars = scanner.nextLine().toCharArray();
                 for (char c : chars) {
-                    initializer(c, p);
-                    p.setY(p.getY()+1) ;
+                    initializer(c, new Position(p.getX(), p.getY())); // Initialize the board with the character
+                    p.setY(p.getY() + 1); // Move to the next column
                 }
-                p.setY(0);
-                p.setX(p.getX()+1);
+                p.setY(0); // Reset the column position
+                p.setX(p.getX() + 1); // Move to the next row
             }
-            cli.printBoard();
+            this.cli.printBoard();
+            p.setX(player.getPosition().getX());
+            p.setY(player.getPosition().getY());
+            scanner.close(); // Close the second scanner
         } catch (FileNotFoundException var15) {
             this.sendMessage("Uploading failed");
             this.is_GameOver();
@@ -153,26 +167,26 @@ public class Manager {
 
     public void create_player(char c, Position p){
         if (c == '1'){
-           this.player= new Warrior('@',p, "John Snow", 300, 30, 4, 3);
+           this.player= new Warrior('@',p, "John Snow", 300, 300, 30, 4,3);
 
         }
         else if (c == '2'){
-            this.player=  new Warrior('@', p, "The Hound", 400, 20, 6, 5);
+            this.player=  new Warrior('@', p, "The Hound", 400, 400, 20, 6,5);
         }
         else if(c == '3'){
-            this.player= new Mage('@',p, "Melisandre", 100, 5, 1, 300, 30, 15,5, 6 );
+            this.player= new Mage('@',p, "Melisandre", 100, 100, 5, 1, 300, 30,15, 5,6 );
         }
         else if (c == '4'){
-            this.player= new Mage('@',p, "Thoros of Myr", 250, 25, 4, 150, 20, 20, 3, 4);
+            this.player= new Mage('@',p, "Thoros of Myr", 250, 250, 25, 4, 150, 20, 20, 3,4);
         }
         else if (c == '5'){
-            this.player= new Rouge('@',p, "Arya Stark", 150, 40, 2, 20, 20);
+            this.player= new Rouge('@',p, "Arya Stark", 150, 150, 40, 2, 20);
         }
         else if (c == '6'){
-            this.player= new Rouge('@', p, "Bronn", 250, 35, 3, 50, 50);
+            this.player= new Rouge('@', p, "Bronn", 250, 250, 35, 3, 50);
         }
         else if (c == '7'){
-            this.player= new Hunter('@',p, "Ygritte", 220, 30, 30, 2, 6,1);
+            this.player= new Hunter('@',p, "Ygritte", 220, 220, 30, 2, 6,1);
         }
     }
 
@@ -185,43 +199,43 @@ public class Manager {
             new Wall(p);
         }
         else if (c == 's'){
-            new Monster('s', p , "Lannister Soldier", 80, 80,8, 3, 3,25);
+            enemies.add(new Monster('s', p , "Lannister Soldier", 80, 80,8, 3, 3,25));
         }
         else if (c == 'k'){
-            new Monster('k',p,"Lannister Knight", 200, 200, 14,8,4,50);
+            enemies.add(new Monster('k',p,"Lannister Knight", 200, 200, 14,8,4,50));
         }
         else if (c == 'q'){
-            new Monster('q',p,"Queen's Guard", 400, 400, 20, 15, 5,100);
+            enemies.add(new Monster('q',p,"Queen's Guard", 400, 400, 20, 15, 5,100));
         }
         else if (c == 'z'){
-            new Monster('z', p,"Wright" , 600, 600, 30, 15, 3,100);
+            enemies.add(new Monster('z', p,"Wright" , 600, 600, 30, 15, 3,100));
         }
         else if (c == 'b'){
-            new Monster('b',p, "Bear-Wright", 1000, 1000, 75,30,4, 250);
+            enemies.add(new Monster('b',p, "Bear-Wright", 1000, 1000, 75,30,4, 250));
         }
         else if (c== 'g'){
-            new Monster('g',p, "Giant-Wright", 1500, 1500,100, 40,5,500);
+            enemies.add(new Monster('g',p, "Giant-Wright", 1500, 1500,100, 40,5,500));
         }
         else if (c == 'w'){
-            new Monster('w',p, "White Walker", 2000, 2000,150,50,6,1000);
+            enemies.add(new Monster('w',p, "White Walker", 2000, 2000,150,50,6,1000));
         }
         else if (c == 'M'){
-            new Boss('M', p, "The Mountain", 1000, 1000 ,60, 25,500,6,5);
+            enemies.add(new Boss('M', p, "The Mountain", 1000, 1000 ,60, 25,500,6,5));
         }
         else if (c == 'C'){
-            new Boss('C',p, "Cersei", 100, 100, 10, 10,1000,1,8);
+            enemies.add(new Boss('C',p, "Cersei", 100, 100, 10, 10,1000,1,8));
         }
         else if (c == 'K'){
-            new Boss('K', p, "Night's King", 5000, 5000, 300, 150,5000,8,3);
+            enemies.add(new Boss('K', p, "Night's King", 5000, 5000, 300, 150,5000,8,3));
         }
         else if (c == 'B'){
-            new Trap('B', p, "Bonus Trap", 1, 1, 1, 1,250,1,5);
+            enemies.add(new Trap('B', p, "Bonus Trap", 1, 1, 1, 1,250,1,5));
         }
         else if (c == 'Q'){
-            new Trap('Q',p, "Queen's Trap", 250, 250,50,10, 100,3,1);
+            enemies.add(new Trap('Q',p, "Queen's Trap", 250, 250,50,10, 100,3,1));
         }
         else if (c == 'D'){
-            new Trap('D',p ,"Death Trap", 500, 500,100,20,250,1,10);
+            enemies.add(new Trap('D',p ,"Death Trap", 500, 500,100,20,250,1,10));
         }
         // Initializing the player
         else if (c == '@') {
@@ -251,8 +265,10 @@ public class Manager {
     public void runGame() {
         while (!gameOver){
             this.cli.acceptInput();
-            for (Enemy e: enemies){
-                e.on_GameTick();
+            if(enemies!=null) {
+                for (Enemy e : enemies) {
+                    e.on_GameTick();
+                }
             }
             this.onGameTick();
         }

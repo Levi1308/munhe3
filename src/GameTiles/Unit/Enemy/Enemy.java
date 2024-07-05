@@ -1,6 +1,7 @@
 package GameTiles.Unit.Enemy;
 
 
+import GameTiles.GameTile;
 import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Player.Player;
@@ -45,6 +46,9 @@ public abstract class Enemy extends Unit{
             player.addExp(this.experience_value);
             manager.removeEnemy(this);
         }
+    }
+    public void interact(GameTile tile) {
+        tile.interact(this);
     }
 
 }
