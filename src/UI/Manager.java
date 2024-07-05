@@ -137,6 +137,10 @@ public class Manager {
                 p.setY(0); // Reset the column position
                 p.setX(p.getX() + 1); // Move to the next row
             }
+            for(Enemy e:enemies)
+            {
+                e.SetPlayer(player);
+            }
             this.cli.printBoard();
             p.setX(player.getPosition().getX());
             p.setY(player.getPosition().getY());

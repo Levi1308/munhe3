@@ -9,7 +9,7 @@ import GameTiles.Unit.Player.Player;
 
 public abstract class Enemy extends Unit{
     private Integer experience_value;
-    public static Player player;
+    public  Player player;
 
     public Enemy(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer experience_value ) {
         super(tile, p, name, health_pool,health_amount, attack_points, defense_points);
@@ -50,5 +50,8 @@ public abstract class Enemy extends Unit{
     public void interact(GameTile tile) {
         tile.interact(this);
     }
-
+    public void SetPlayer(Player player)
+    {
+        this.player=player;
+    }
 }
