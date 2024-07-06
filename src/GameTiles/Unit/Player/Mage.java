@@ -33,9 +33,9 @@ public class Mage extends Player{
     @Override
     public void levelUp() {
         super.levelUp();
-        mana_pool=mana_pool+25*getLevel();
-        current_mana=Math.min(current_mana+mana_pool/4,mana_pool);
-        spell_power=spell_power+10*getLevel();
+        mana_pool = mana_pool + (25 * getLevel());
+        current_mana = Math.min(current_mana + (mana_pool / 4), mana_pool);
+        spell_power = spell_power + (10 * getLevel());
     }
 
     @Override
@@ -44,15 +44,8 @@ public class Mage extends Player{
         current_mana=current_mana-mana_cost;
     }
 
-    public String description()
-    {
-        return super.description()+"\n"+
-                "mana_pool: " + mana_pool + "\n" +
-                "current_mana: " + current_mana + "\n" +
-                "mana_cost: " + mana_cost + "\n" +
-                "spell_power: " + spell_power + "\n" +
-                "hits_count: " + hits_count + "\n" +
-                "ability_range: " + ability_range+"\n";
+    public String description(){
+        return super.description() + ", Mana: " + current_mana +'/' + mana_pool + ", Spell power: " + spell_power;
     }
 
     @Override

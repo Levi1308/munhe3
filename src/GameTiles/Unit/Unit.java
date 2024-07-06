@@ -28,7 +28,7 @@ public abstract class Unit extends GameTile implements Visitor{
         this.health_amount = health_amount;
         this.attack_points = attack_points;
         this.defense_points = defense_points;
-        manager.setEnemies(enemyList);
+        //manager.setEnemies(enemyList);
     }
     public void setName(String name) {
         this.name = name;
@@ -77,13 +77,9 @@ public abstract class Unit extends GameTile implements Visitor{
     }
 
     public String description() {
-        return "Description:\n"+
-                "Name: "+getName()+"\n"+
-                "Health pool: "+this.getHealth_pool()+"\n"+
-                "Health amount: "+this.getHealth_amount()+"\n"+
-                "Attack points: "+getAttack_points()+"\n"+
-                "Defence points: "+getDefense_points()+"\n";
+        return getName() + ", Health: " + health_amount +'/' + health_pool + ", Attack: " + attack_points + ", Defense: " + defense_points;
     }
+
 
     public int random_Defense(){
         Random random = new Random();

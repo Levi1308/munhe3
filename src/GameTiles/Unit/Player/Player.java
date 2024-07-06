@@ -23,14 +23,13 @@ public abstract class Player extends Unit implements HeroicUnit{
         this.level = 1;
         this.experience = 0;
     }
-    public void levelUp()
-    {
-        experience+=50*level;
-        level++;
-        setHealth_pool(getHealth_pool()+10*level);
+    public void levelUp(){
+        experience = experience - (level * 50);
+        level = level + 1;
+        setHealth_pool(getHealth_pool() + (10 * level));
         setHealth_amount(getHealth_pool());
-        setAttack_points(getAttack_points()+4*level);
-        setDefense_points(getDefense_points()+level);
+        setAttack_points(getAttack_points() + (4 * level));
+        setDefense_points(getDefense_points() + level);
     }
     public abstract void onGameTick();
     public Integer getLevel() {
@@ -52,11 +51,8 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-    public String description(){
-        return super.description()+
-                "experience: " + experience + "\n" +
-                "level: " + level;
-
+    public String description() {
+        return super.description() + ", Level: " + level + ", Experience: " + experience + '/' + (50 * level);
     }
 
     public abstract void castAbility();

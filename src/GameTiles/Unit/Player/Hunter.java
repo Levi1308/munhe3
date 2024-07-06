@@ -24,9 +24,9 @@ public class Hunter extends Player {
     @Override
     public void levelUp() {
         super.levelUp();
-        arrows_count=arrows_count+10*getLevel();
-        setAttack_points(getAttack_points()+2*getLevel());
-        setDefense_points(getDefense_points()+getLevel());
+        arrows_count = arrows_count + (10 * getLevel());
+        setAttack_points(getAttack_points() + (2 * getLevel()));
+        setDefense_points(getDefense_points() + getLevel());
     }
     @Override
     public void onGameTick()
@@ -39,11 +39,8 @@ public class Hunter extends Player {
         else
             ticks_count++;
     }
-    public String description() {
-        return super.description()+
-                "range: " + range + "\n" +
-                "arrows_count: " + arrows_count + "\n" +
-                "ticks_count: " + ticks_count+"\n";
+    public String description(){
+        return super.description() + " Arrows: " + arrows_count;
     }
     @Override
     public void castAbility() {

@@ -24,8 +24,8 @@ public class Warrior extends Player {
     public void levelUp() {
         super.levelUp();
         remaining_cooldown = 0;
-        setHealth_pool(getHealth_amount() + 5 * getLevel());
-        setAttack_points(getAttack_points() + 2 * getLevel());
+        setHealth_pool(getHealth_pool() + (5 * getLevel()));
+        setAttack_points(getAttack_points() + (2 * getLevel()));
         setDefense_points(getDefense_points() + getLevel());
     }
 
@@ -35,11 +35,8 @@ public class Warrior extends Player {
     }
 
     @Override
-    public String description() {
-        return super.toString() +
-                "Ability cooldown: " + ability_cooldown + "\n" +
-                "Remaining cooldown: " + remaining_cooldown + "\n";
-
+    public String description(){
+        return super.description() + ", Cooldown: " + remaining_cooldown + '/' + ability_cooldown;
     }
 
     @Override

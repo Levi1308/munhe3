@@ -23,8 +23,8 @@ public class Rouge extends Player{
     @Override
     public void levelUp() {
         super.levelUp();
-        current_energy=100;
-        setAttack_points(getAttack_points()+3*getLevel());
+        current_energy = 100;
+        setAttack_points(getAttack_points() + (3 * getLevel()));
     }
 
     @Override
@@ -33,11 +33,8 @@ public class Rouge extends Player{
         current_energy=Math.min(current_energy + 10, 100);
     }
 
-    public String description()
-    {
-        return super.description()+
-                "cost: " + cost + "\n" +
-                "current_energy: " + current_energy+"\n";
+    public String description() {
+        return super.description() + ", Energy: " + current_energy + "/100";
     }
 
     @Override
