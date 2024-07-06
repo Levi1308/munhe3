@@ -28,7 +28,7 @@ public abstract class Unit extends GameTile implements Visitor{
         this.health_amount = health_amount;
         this.attack_points = attack_points;
         this.defense_points = defense_points;
-        manager.setEnemies(enemyList);
+        //manager.setEnemies(enemyList);
     }
     public void setName(String name) {
         this.name = name;
