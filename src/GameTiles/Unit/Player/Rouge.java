@@ -35,7 +35,7 @@ public class Rouge extends Player{
 
     public String description()
     {
-        return super.description()+
+        return super.description()+"\n"+
                 "cost: " + cost + "\n" +
                 "current_energy: " + current_energy+"\n";
     }

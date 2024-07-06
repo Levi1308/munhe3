@@ -40,7 +40,7 @@ public class Hunter extends Player {
             ticks_count++;
     }
     public String description() {
-        return super.description()+
+        return super.description()+"\n"+
                 "range: " + range + "\n" +
                 "arrows_count: " + arrows_count + "\n" +
                 "ticks_count: " + ticks_count+"\n";

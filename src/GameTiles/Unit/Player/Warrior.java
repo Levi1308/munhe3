@@ -36,7 +36,7 @@ public class Warrior extends Player {
 
     @Override
     public String description() {
-        return super.toString() +
+        return super.toString() +"\n"+
                 "Ability cooldown: " + ability_cooldown + "\n" +
                 "Remaining cooldown: " + remaining_cooldown + "\n";
 
