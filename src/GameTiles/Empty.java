@@ -18,15 +18,6 @@ public class Empty extends GameTile {
 
     public void interact(Wall wall) {}
 
-    @Override
-    public void interact(Enemy enemy) {
-        this.swapTiles(enemy);
-    }
-    public void interact(GameTile tile) {
-        tile.interact(this);
-    }
-    @Override
-    public void interact(Player player) {
-        this.swapTiles(player);
-    }
+    public void interact(GameTile tile) {}
+
 }

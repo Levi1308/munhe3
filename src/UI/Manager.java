@@ -46,6 +46,7 @@ public class Manager {
     public void addToTiles(GameTile tile){
         tiles.add(tile);
     }
+
     public void onGameTick(){
         player.onGameTick();
         sendMessage(player.description());
@@ -68,9 +69,11 @@ public class Manager {
     public void setCli(CLI cli) {
         this.cli = cli;
     }
+
     public void sendMessage(String msg) {
         this.cli.print(msg);
     }
+
     public boolean playerExists(){
         return player != null;
     }
@@ -98,55 +101,41 @@ public class Manager {
     public void readFile(String path) throws FileNotFoundException {
         try {
             this.path = path;
-            // Create a File object for the next level
             File nextBoard = new File(path + "\\level" + this.gameLevel + ".txt");
             Scanner readLines = new Scanner(nextBoard);
-            int a = 0; // Number of lines (rows)
-            int b = 0; // Number of columns
-            readLines.useDelimiter(""); // Set the delimiter to read individual characters
+            int a = 0;
+            int b = 0;
+            readLines.useDelimiter("");
 
-            // Count the number of columns (b) by reading until a newline is encountered
             while (readLines.hasNext() && readLines.next().equals("#")) {
                 b++;
             }
 
-            // Count the number of rows (a) by reading each line
             while (readLines.hasNextLine()) {
                 a++;
                 readLines.nextLine();
             }
-            readLines.close(); // Close the first scanner
-
-            // Initialize the board with the determined dimensions
             this.board = new Board(a, b);
             this.cli.setBoard(this.board);
 
-            // Reset the position for placing elements on the board
             Position p = new Position(0, 0);
-            // Create another File object for the same level (to re-read)
             File nextLevel = new File(path + "\\level" + gameLevel + ".txt");
             Scanner scanner = new Scanner(nextLevel);
-
-            // Read the file line by line and initialize the board
             while (scanner.hasNextLine()) {
                 char[] chars = scanner.nextLine().toCharArray();
                 for (char c : chars) {
-                    initializer(c, new Position(p.getX(), p.getY())); // Initialize the board with the character
-                    p.setY(p.getY() + 1); // Move to the next column
+                    initializer(c, new Position(p.getX(), p.getY()));
+                    p.setY(p.getY() + 1);
                 }
-                p.setY(0); // Reset the column position
-                p.setX(p.getX() + 1); // Move to the next row
+                p.setY(0);
+                p.setX(p.getX() + 1);
             }
-            for(Enemy e:enemies)
-            {
-                e.SetPlayer(player);
-            }
+
             this.cli.printBoard();
             p.setX(player.getPosition().getX());
             p.setY(player.getPosition().getY());
-            scanner.close(); // Close the second scanner
         } catch (FileNotFoundException var15) {
-            this.sendMessage("Uploading failed");
+            this.sendMessage("You win!");
             this.is_GameOver();
         }
     }
@@ -190,7 +179,7 @@ public class Manager {
             this.player= new Rouge('@', p, "Bronn", 250, 250, 35, 3, 50);
         }
         else if (c == '7'){
-            this.player= new Hunter('@',p, "Ygritte", 220, 220, 30, 2, 6,1);
+            this.player= new Hunter('@',p, "Ygritte", 220, 220, 30, 2, 6);
         }
     }
 
@@ -271,7 +260,7 @@ public class Manager {
             this.cli.acceptInput();
             if(enemies!=null) {
                 for (Enemy e : enemies) {
-                    e.on_GameTick();
+                    e.onGameTick();
                 }
             }
             this.onGameTick();

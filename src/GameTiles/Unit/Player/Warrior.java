@@ -3,6 +3,7 @@ package GameTiles.Unit.Player;
 import GameTiles.Empty;
 import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.Enemy;
+import GameTiles.Unit.Unit;
 
 import GameTiles.Wall;
 
@@ -11,12 +12,12 @@ import java.util.Random;
 
 public class Warrior extends Player {
     public Integer ability_cooldown;
-    public Integer remaining_cooldown ;
+    public Integer remaining_cooldown;
 
-    public Warrior(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points,Integer ability_cooldown) {
+    public Warrior(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer ability_cooldown) {
         super(tile, p, name, health_pool, health_amount, attack_points, defense_points);
-        this.ability_cooldown=ability_cooldown;
-        this.remaining_cooldown=0;
+        this.ability_cooldown = ability_cooldown;
+        this.remaining_cooldown = 0;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class Warrior extends Player {
 
     @Override
     public void onGameTick() {
-        remaining_cooldown--;
+        remaining_cooldown = Math.max(remaining_cooldown - 1, 0);
     }
 
     @Override
@@ -44,46 +45,25 @@ public class Warrior extends Player {
     @Override
     public void castAbility() {
         if (remaining_cooldown == 0) {
-            List<Enemy> enemies = this.enemyList_byRange(3);
-            if(enemies!=null) {
-                Random rand = new Random();
-                int index = rand.nextInt(1, enemies.size());
-                Enemy battleEnemy = enemies.get(index);
-                battleEnemy.setHealth_amount(this.getHealth_amount()-this.getHealth_pool()/10);
-                if(battleEnemy.isDead())
-                {
-                    this.addExp(battleEnemy.GetExperiance());
-                    battleEnemy.setTile('.');
+            remaining_cooldown = ability_cooldown;
+            setHealth_amount(Math.min(getHealth_amount() + (10 * getDefense_points()), getHealth_pool()));
+            manager.sendMessage(getName() + " used Avenger's Shield");
+            List<Enemy> enemies_list = getEnemyList();
+            if (enemies_list.size() != 0) {
+                List<Enemy> enemies_inRange = enemyList_byRange(3);
+                if (enemies_inRange.size() != 0) {
+                    Random random = new Random();
+                    Enemy random_enemy = enemies_inRange.get(random.nextInt(enemies_inRange.size()));
+                    int defense = random_enemy.random_Defense();
+                    manager.sendMessage(getName() + " hit " + random_enemy.getName() + " for " + ((getHealth_pool() / 10) + -defense) + " ability damage");
+                    random_enemy.lose_health((getHealth_pool() / 10) - defense);
                 }
-                this.remaining_cooldown = ability_cooldown;
-                setHealth_amount(Math.min(getHealth_amount() + (10 * getDefense_points()), getHealth_pool()));
             }
-            else
-            {
-                //add response
-            }
-            } else {
-            //add response
+        } else {
+            manager.sendMessage(getName() + " tried to cast Avenger's Shield, but there is a cooldown: " + remaining_cooldown);
         }
     }
-
-    @Override
-    public void interact(Enemy enemy) {
-        this.Battle(enemy);
-    }
-
-    @Override
-    public void interact(Player player) {
-        //undefinded
-    }
-
-    @Override
-    public void interact(Empty empty) {
-        empty.swapTiles(this);
-    }
-
-    @Override
-    public void interact(Wall wall) {
-        wall.interact(this);
+    public void interact(Unit unit) {
+        unit.interact(this);
     }
 }

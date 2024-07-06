@@ -2,6 +2,8 @@ package GameTiles;
 import GameTiles.Unit.Enemy.Enemy;
 import GameTiles.Unit.Player.Player;
 import GameTiles.Utilis.Position;
+import GameTiles.Unit.Unit;
+
 
 public class Wall extends GameTile{
     public Wall (Position p){
@@ -16,15 +18,8 @@ public class Wall extends GameTile{
 
     }
     public void interact(GameTile tile) {
-        tile.interact(this);
-    }
-    @Override
-    public void interact(Enemy enemy) {
 
     }
-
-    @Override
-    public void interact(Player player) {
-
+    public void interact(Unit unit) {
     }
 }

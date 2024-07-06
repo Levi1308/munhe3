@@ -4,6 +4,7 @@ import java.util.Random;
 
 import GameTiles.Utilis.Position;
 import GameTiles.Unit.HeroicUnit;
+import GameTiles.Unit.Unit;
 
 
 public class Boss extends Monster implements HeroicUnit{
@@ -18,7 +19,7 @@ public class Boss extends Monster implements HeroicUnit{
 
 
     @Override
-    public void on_GameTick() {
+    public void onGameTick() {
         if (range(player) < getVision_range()){
             if (combat_tick == ability_frequency){
                 combat_tick = 0;

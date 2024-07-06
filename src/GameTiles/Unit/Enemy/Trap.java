@@ -2,6 +2,7 @@ package GameTiles.Unit.Enemy;
 
 import GameTiles.GameTile;
 import GameTiles.Utilis.Position;
+import GameTiles.Unit.Unit;
 
 public class Trap extends Enemy{
     private int visibility_time;
@@ -16,6 +17,7 @@ public class Trap extends Enemy{
         this.tick_count = 0;
         this.visibility_time = visibility_time;
         this.invisibility_time = invisibility_time;
+        this.original_tile = tile;
     }
 
     public void setVisible(boolean bool){
@@ -23,7 +25,7 @@ public class Trap extends Enemy{
     }
 
     @Override
-    public void on_GameTick() {
+    public void onGameTick() {
         this.visible = this.tick_count < this.visibility_time;////visible or not
         if (this.visible) {
             this.setTile(this.original_tile);
@@ -45,6 +47,10 @@ public class Trap extends Enemy{
     }
 
     public void interact(GameTile tile) {}
+
+    public void interact(Unit unit) {
+        unit.interact(this);
+    }
 
     public Boolean getVisible() {
         return visible;
