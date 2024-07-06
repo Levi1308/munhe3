@@ -1,7 +1,7 @@
 package GameTiles.Unit;
 
 import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Player.*;
 import GameTiles.Empty;
@@ -11,11 +11,6 @@ import GameTiles.Wall;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public abstract class Unit extends GameTile implements Visitor{
     private String name;
@@ -33,7 +28,7 @@ public abstract class Unit extends GameTile implements Visitor{
         this.health_amount = health_amount;
         this.attack_points = attack_points;
         this.defense_points = defense_points;
-        //manager.setEnemies(enemyList);
+        manager.setEnemies(enemyList);
     }
     public void setName(String name) {
         this.name = name;
@@ -51,10 +46,7 @@ public abstract class Unit extends GameTile implements Visitor{
         this.attack_points = attack_points;
     }
 
-    public void setDefense_points(Integer defense_points) {
-
-        this.defense_points = defense_points;
-    }
+    public void setDefense_points(Integer defense_points) {this.defense_points = defense_points;}
 
    public Integer getHealth_pool() {
         return health_pool;
@@ -96,36 +88,36 @@ public abstract class Unit extends GameTile implements Visitor{
     public int random_Defense(){
         Random random = new Random();
         int defense = random.nextInt(defense_points);
-        //manager.sendMessage(getName() + " rolled " + defense + " defense points");
+        manager.sendMessage(getName() + " rolled " + defense + " defense points");
         return defense;
     }
 
     public int random_Attack(){
         Random random = new Random();
         int attack = random.nextInt(attack_points);
-        //manager.sendMessage(getName() + " rolled " + attack + " defense points");
+        manager.sendMessage(getName() + " rolled " + attack + " defense points");
         return attack;
     }
 
     public void interact(Player player){
-        //this.interact(player);
+        player.interact(this);
     }
 
     public void interact(Enemy enemy){
+        enemy.interact(this);
+    }
 
-        //this.interact(enemy);
+    public void interact(GameTile tile){
+        tile.interact(this);
     }
 
     public void interact(Empty empty){
-
-        //this.swapTiles(empty);
+        this.swapTiles(empty);
     }
 
     public void interact(Wall wall){
-
-        //wall.interact(this);
+        wall.interact(this);
     }
-
     public boolean isDead(){
         return health_amount <= 0;
     }

@@ -2,11 +2,8 @@ package GameTiles.Unit.Enemy;
 
 import java.util.Random;
 import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
-
-
-import java.util.Random;
 
 public class Monster extends Enemy {
 
@@ -17,7 +14,7 @@ public class Monster extends Enemy {
         this.vision_range = vision_range;
     }
 
-    public void on_GameTick() {
+    public void onGameTick() {
         move();
     }
 
@@ -60,9 +57,8 @@ public class Monster extends Enemy {
         tile.interact(this);
     }
 
+    public void interact(Enemy enemy){}
     public void interact(Unit unit) {
         unit.interact(this);
     }
-
-    public void interact(Enemy enemy){}
 }

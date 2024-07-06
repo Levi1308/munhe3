@@ -3,7 +3,7 @@ package GameTiles;
 import GameTiles.Unit.Enemy.Enemy;
 import GameTiles.Unit.Player.Player;
 import GameTiles.Unit.Unit;
-
+import GameTiles.Utilis.Position;
 
 
 public class Empty extends GameTile {
@@ -18,13 +18,6 @@ public class Empty extends GameTile {
 
     public void interact(Wall wall) {}
 
-    @Override
-    public void interact(Enemy enemy) {
+    public void interact(GameTile tile) {}
 
-    }
-
-    @Override
-    public void interact(Player player) {
-
-    }
 }

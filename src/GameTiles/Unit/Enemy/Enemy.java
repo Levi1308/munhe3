@@ -2,15 +2,15 @@ package GameTiles.Unit.Enemy;
 
 
 import GameTiles.GameTile;
-import GameTiles.Position;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Player.Player;
-import GameTiles.Manager;
 
 
 public abstract class Enemy extends Unit{
-    private Integer experience_value;
     public static Player player;
+    protected Integer experience_value;
+
 
     public Enemy(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer experience_value ) {
         super(tile, p, name, health_pool,health_amount, attack_points, defense_points);
@@ -20,7 +20,9 @@ public abstract class Enemy extends Unit{
     public int GetExperiance() {
         return this.experience_value;
     }
-    public abstract void on_GameTick();
+
+    public abstract void onGameTick();
+
 
     public void interact(Player player){
         manager.sendMessage(getName() + " engaged in combat with " + player.getName() + '.');

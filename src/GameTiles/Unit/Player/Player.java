@@ -3,24 +3,25 @@ package GameTiles.Unit.Player;
 
 
 import GameTiles.Empty;
-import GameTiles.Position;
+import GameTiles.GameTile;
+import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.*;
 import GameTiles.Unit.Visited;
-import GameTiles.GameTile;
-import GameTiles.Manager.*;
 import GameTiles.Unit.HeroicUnit;
 import GameTiles.Wall;
 
-import java.util.Random;
-
 
 public abstract class Player extends Unit implements HeroicUnit{
-    private Integer experience = 0;
-    private Integer level = 1;
+    private Integer experience;
+    private Integer level;
 
     public Player(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points) {
-        super(tile,p,name, health_pool, health_amount, attack_points, defense_points);
+        super('@',p,name, health_pool, health_amount, attack_points, defense_points);
+        Enemy.player = this;
+        manager.setPlayer(this);
+        this.level = 1;
+        this.experience = 0;
     }
     public void levelUp()
     {
@@ -31,6 +32,7 @@ public abstract class Player extends Unit implements HeroicUnit{
         setAttack_points(getAttack_points()+4*level);
         setDefense_points(getDefense_points()+level);
     }
+    public abstract void onGameTick();
     public Integer getLevel() {
         return level;
     }
@@ -58,33 +60,27 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     public abstract void castAbility();
+
     @Override
     public void interact(Enemy enemy) {
-        this.Battle(enemy);
+        this.battle(enemy);
     }
+
     @Override
     public void interact(Player player) {}
-    @Override
-    public void interact(Empty empty) {
-        this.swapTiles(empty);
-    }
-    @Override
-    public void interact(Wall wall) {
-        wall.interact(this);
-    }
-    public void Battle(Enemy enemy){
-        int attack=random_Attack();
-        int defence=random_Defense();
-        if(attack-defence>0)
-        {
-            enemy.setHealth_amount(enemy.getHealth_amount()-(attack-defence));
-            if(enemy.isDead())
-            {
-               this.addExp(enemy.GetExperiance());
-                enemy.setTile('.');
-                this.swapTiles(enemy);
-            }
+
+    protected void battle(Enemy enemy){
+        manager.sendMessage(getName() + " engaged in combat with " + enemy.getName() + '.');
+        int rand_att = random_Attack();
+        int rand_def = enemy.random_Defense();
+        if (rand_att - rand_def > 0){
+            manager.sendMessage(getName() + " dealt " + (rand_att-rand_def) + " damage to " + enemy.getName() +".");
+            enemy.lose_health(rand_att-rand_def);
         }
+        else {
+            manager.sendMessage(getName() + " dealt " + 0 + " to " + enemy.getName() + ".");
+        }
+        manager.sendMessage(enemy.description());
     }
 
 
@@ -97,24 +93,24 @@ public abstract class Player extends Unit implements HeroicUnit{
         }
     }
 
-   /* public void moveUp() {
+    public void moveUp() {
         Visited tile = board.getTile(getPosition().getX() - 1, getPosition().getY());  //move up
         tile.accept(this);
     }
 
     public void moveDown() {
-        Visited tile = board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
+        Visited tile =  board.getTile(getPosition().getX() + 1, getPosition().getY());  //move down
         tile.accept(this);
     }
 
     public void moveLeft() {
-        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
+        Visited tile =  board.getTile(getPosition().getX(), getPosition().getY() - 1); //move left
         tile.accept(this);
     }
 
     public void moveRight() {
-        Visited tile = board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
+        Visited tile =  board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
-    }*/
+    }
 }
 
