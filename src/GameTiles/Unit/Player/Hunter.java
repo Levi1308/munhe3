@@ -18,7 +18,7 @@ public class Hunter extends Player {
             , Integer range) {
         super(tile,p,name, health_pool, health_amount, attack_points, defense_points);
         this.range=range;
-        this.arrows_count= 10;
+        this.arrows_count= 10*getLevel();
         this.ticks_count=0;
     }
     @Override
@@ -33,7 +33,7 @@ public class Hunter extends Player {
     {
         if(ticks_count==10)
         {
-            arrows_count--;
+            arrows_count+=getLevel();
             ticks_count=0;
         }
         else

@@ -41,7 +41,7 @@ public class Mage extends Player{
     @Override
     public void onGameTick()
     {
-        current_mana=current_mana-mana_cost;
+      current_mana=Math.min(mana_pool,current_mana+getLevel());
     }
 
     public String description()
