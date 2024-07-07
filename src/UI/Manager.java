@@ -20,7 +20,7 @@ public class Manager {
     private boolean gameOver = false;
     private int gameLevel = 1;
     private CLI cli;
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Enemy> enemies ;
     private ArrayList<GameTile> tiles;
     private String path;
 
@@ -124,6 +124,8 @@ public class Manager {
             while (scanner.hasNextLine()) {
                 char[] chars = scanner.nextLine().toCharArray();
                 for (char c : chars) {
+                    if(c>='a' && c<='z')
+                        this.gameLevel=this.gameLevel;
                     initializer(c, new Position(p.getX(), p.getY()));
                     p.setY(p.getY() + 1);
                 }
@@ -192,43 +194,43 @@ public class Manager {
             new Wall(p);
         }
         else if (c == 's'){
-            enemies.add(new Monster('s', p , "Lannister Soldier", 80, 80,8, 3, 3,25));
+            new Monster('s', p , "Lannister Soldier", 80, 80,8, 3, 3,25);
         }
         else if (c == 'k'){
-            enemies.add(new Monster('k',p,"Lannister Knight", 200, 200, 14,8,4,50));
+            new Monster('k',p,"Lannister Knight", 200, 200, 14,8,4,50);
         }
         else if (c == 'q'){
-            enemies.add(new Monster('q',p,"Queen's Guard", 400, 400, 20, 15, 5,100));
+            new Monster('q',p,"Queen's Guard", 400, 400, 20, 15, 5,100);
         }
         else if (c == 'z'){
-            enemies.add(new Monster('z', p,"Wright" , 600, 600, 30, 15, 3,100));
+            new Monster('z', p,"Wright" , 600, 600, 30, 15, 3,100);
         }
         else if (c == 'b'){
-            enemies.add(new Monster('b',p, "Bear-Wright", 1000, 1000, 75,30,4, 250));
+            new Monster('b',p, "Bear-Wright", 1000, 1000, 75,30,4, 250);
         }
         else if (c== 'g'){
-            enemies.add(new Monster('g',p, "Giant-Wright", 1500, 1500,100, 40,5,500));
+            new Monster('g',p, "Giant-Wright", 1500, 1500,100, 40,5,500);
         }
         else if (c == 'w'){
-            enemies.add(new Monster('w',p, "White Walker", 2000, 2000,150,50,6,1000));
+            new Monster('w',p, "White Walker", 2000, 2000,150,50,6,1000);
         }
         else if (c == 'M'){
-            enemies.add(new Boss('M', p, "The Mountain", 1000, 1000 ,60, 25,500,6,5));
+            new Boss('M', p, "The Mountain", 1000, 1000 ,60, 25,500,6,5);
         }
         else if (c == 'C'){
-            enemies.add(new Boss('C',p, "Cersei", 100, 100, 10, 10,1000,1,8));
+            new Boss('C',p, "Cersei", 100, 100, 10, 10,1000,1,8);
         }
         else if (c == 'K'){
-            enemies.add(new Boss('K', p, "Night's King", 5000, 5000, 300, 150,5000,8,3));
+            new Boss('K', p, "Night's King", 5000, 5000, 300, 150,5000,8,3);
         }
         else if (c == 'B'){
-            enemies.add(new Trap('B', p, "Bonus Trap", 1, 1, 1, 1,250,1,5));
+            new Trap('B', p, "Bonus Trap", 1, 1, 1, 1,250,1,5);
         }
         else if (c == 'Q'){
-            enemies.add(new Trap('Q',p, "Queen's Trap", 250, 250,50,10, 100,3,1));
+            new Trap('Q',p, "Queen's Trap", 250, 250,50,10, 100,3,1);
         }
         else if (c == 'D'){
-            enemies.add(new Trap('D',p ,"Death Trap", 500, 500,100,20,250,1,10));
+            new Trap('D',p ,"Death Trap", 500, 500,100,20,250,1,10);
         }
         // Initializing the player
         else if (c == '@') {

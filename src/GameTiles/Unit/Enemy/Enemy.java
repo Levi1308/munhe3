@@ -35,7 +35,7 @@ public abstract class Enemy extends Unit{
         else {
             manager.sendMessage(getName() + " dealt " + 0 + " to " + player.getName() + ".");
         }
-        manager.sendMessage(description());
+        manager.sendMessage(player.description());
     }
 
     public void interact(Enemy enemy){}

@@ -53,7 +53,7 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
 
     public String description(){
-        return super.description()+
+        return super.description()+"\n"+
                 "experience: " + experience + "\n" +
                 "level: " + level;
 

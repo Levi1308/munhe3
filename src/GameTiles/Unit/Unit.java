@@ -95,7 +95,7 @@ public abstract class Unit extends GameTile implements Visitor{
     public int random_Attack(){
         Random random = new Random();
         int attack = random.nextInt(attack_points);
-        manager.sendMessage(getName() + " rolled " + attack + " defense points");
+        manager.sendMessage(getName() + " rolled " + attack + " attack points");
         return attack;
     }
 
