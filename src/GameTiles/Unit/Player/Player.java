@@ -51,9 +51,9 @@ public abstract class Player extends Unit implements HeroicUnit{
             levelUp();
         }
     }
-
-    public String description(){
-        return super.description()+"\n"+
+    @Override
+    public String description() {
+        return super.description() + "\n" +
                 "experience: " + experience + "\n" +
                 "level: " + level;
 

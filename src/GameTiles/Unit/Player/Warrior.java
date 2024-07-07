@@ -34,9 +34,10 @@ public class Warrior extends Player {
         remaining_cooldown = Math.max(remaining_cooldown - 1, 0);
     }
 
+
     @Override
     public String description() {
-        return super.toString() +"\n"+
+        return super.description() + "\n" +
                 "Ability cooldown: " + ability_cooldown + "\n" +
                 "Remaining cooldown: " + remaining_cooldown + "\n";
 
