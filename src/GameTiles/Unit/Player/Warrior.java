@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Warrior extends Player {
-    public Integer ability_cooldown;
-    public Integer remaining_cooldown;
+    private Integer ability_cooldown;
+    private Integer remaining_cooldown;
 
     public Warrior(char tile, Position p, String name, Integer health_pool, Integer health_amount, Integer attack_points, Integer defense_points, Integer ability_cooldown) {
         super(tile, p, name, health_pool, health_amount, attack_points, defense_points);
@@ -67,4 +67,20 @@ public class Warrior extends Player {
     public void interact(Unit unit) {
         unit.interact(this);
     }
+    public Integer getAbility_cooldown() {
+        return ability_cooldown;
+    }
+
+    public void setAbility_cooldown(Integer ability_cooldown) {
+        this.ability_cooldown = ability_cooldown;
+    }
+
+    public Integer getRemaining_cooldown() {
+        return remaining_cooldown;
+    }
+
+    public void setRemaining_cooldown(Integer remaining_cooldown) {
+        this.remaining_cooldown = remaining_cooldown;
+    }
+
 }

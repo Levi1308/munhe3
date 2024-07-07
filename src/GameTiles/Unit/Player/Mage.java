@@ -76,4 +76,52 @@ public class Mage extends Player{
     public void interact(Unit unit) {
         unit.interact(this);
     }
+    public Integer getMana_pool() {
+        return mana_pool;
+    }
+
+    public void setMana_pool(Integer mana_pool) {
+        this.mana_pool = mana_pool;
+    }
+
+    public Integer getCurrent_mana() {
+        return current_mana;
+    }
+
+    public void setCurrent_mana(Integer current_mana) {
+        this.current_mana = current_mana;
+    }
+
+    public Integer getMana_cost() {
+        return mana_cost;
+    }
+
+    public void setMana_cost(Integer mana_cost) {
+        this.mana_cost = mana_cost;
+    }
+
+    public Integer getSpell_power() {
+        return spell_power;
+    }
+
+    public void setSpell_power(Integer spell_power) {
+        this.spell_power = spell_power;
+    }
+
+    public Integer getHits_count() {
+        return hits_count;
+    }
+
+    public void setHits_count(Integer hits_count) {
+        this.hits_count = hits_count;
+    }
+
+    public Integer getAbility_range() {
+        return ability_range;
+    }
+
+    public void setAbility_range(Integer ability_range) {
+        this.ability_range = ability_range;
+    }
+
 }
