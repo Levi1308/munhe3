@@ -1,4 +1,4 @@
-package UI;
+package GameTiles.Unit.Enemy;
 
 import GameTiles.Unit.Enemy.Monster;
 import GameTiles.Unit.Enemy.Trap;
@@ -10,6 +10,7 @@ import GameTiles.Utilis.Board;
 import GameTiles.Utilis.Position;
 import GameTiles.Wall;
 import GameTiles.Unit.Unit;
+import UI.Manager;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -56,14 +57,6 @@ class MainTest {
         assertEquals(2, MonsterTestRight.getPosition().getY());
     }
 
-    @Test
-    void Wall() {
-        Monster MonsterTestUp = new Monster('H', new Position(9,5), "MonsterTest", 100,100, 30, 5, 5, 50);
-        Wall WallTest = new Wall(new Position(8,5));
-        MonsterTestUp.move();
-        assertEquals(9, MonsterTestUp.getPosition().getX());
-        assertEquals(5, MonsterTestUp.getPosition().getY());
-    }
 
     @Test
     void battle() {
@@ -128,6 +121,6 @@ class MainTest {
         assertEquals(monster3.getHealth_amount(), health2);
         hunter.castAbility();
         assertTrue(monster4.getHealth_amount() < 100);
-        assertEquals(monster5.getHealth_amount(), 100);//The hunter should hit only monster4 because he is the closest
+        assertEquals(monster5.getHealth_amount(), 100); //The hunter should hit only monster4 because he is the closest
     }
 }

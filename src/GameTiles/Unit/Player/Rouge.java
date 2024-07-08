@@ -35,7 +35,7 @@ public class Rouge extends Player{
 
     public String description()
     {
-        return super.description()+
+        return super.description()+"\n"+
                 "cost: " + cost + "\n" +
                 "current_energy: " + current_energy+"\n";
     }
@@ -60,4 +60,20 @@ public class Rouge extends Player{
     public void interact(Unit unit) {
         unit.interact(this);
     }
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
+    public Integer getCurrent_energy() {
+        return current_energy;
+    }
+
+    public void setCurrent_energy(Integer current_energy) {
+        this.current_energy = current_energy;
+    }
+
 }

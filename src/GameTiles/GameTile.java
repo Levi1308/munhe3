@@ -63,8 +63,8 @@ public abstract class GameTile implements  Visitor, Visited {
         visitor.interact(this);
     }
 
-    @Override
     public String toString() {
-        return tile+"   "+position.getX()+","+ position.getY();
+        //return tile+"   "+position.getX()+","+ position.getY();
+        return "";
     }
 }
