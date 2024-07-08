@@ -87,7 +87,7 @@ public class Trap extends Enemy {
         this.original_tile = original_tile;
     }
 
-    public boolean isVisible() {
+    public boolean getVisible() {
         return visible;
     }
 }
