@@ -59,8 +59,8 @@ public abstract class GameTile implements  Visitor, Visited {
         return tile+"";
     }
 
-    public void accept(Visitor visitor){
-        visitor.interact(this);
+    public abstract void accept(Visitor visitor);{
+        //visitor.interact(this);
     }
 
     public String toString() {

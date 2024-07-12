@@ -28,7 +28,7 @@ public abstract class Unit extends GameTile implements Visitor{
         this.health_amount = health_amount;
         this.attack_points = attack_points;
         this.defense_points = defense_points;
-        //manager.setEnemies(enemyList);
+        manager.setEnemies(enemyList);
     }
     public void setName(String name) {
         this.name = name;
@@ -103,10 +103,6 @@ public abstract class Unit extends GameTile implements Visitor{
         enemy.interact(this);
     }
 
-    public void interact(GameTile tile){
-        tile.interact(this);
-    }
-
     public void interact(Empty empty){
         this.swapTiles(empty);
     }
@@ -141,5 +137,10 @@ public abstract class Unit extends GameTile implements Visitor{
             }
         }
         return closeEnemy;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.interact(this);
     }
 }

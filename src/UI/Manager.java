@@ -12,6 +12,7 @@ import GameTiles.Utilis.Position;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Manager {
@@ -23,7 +24,7 @@ public class Manager {
     private ArrayList<Enemy> enemies ;
     private ArrayList<GameTile> tiles;
     private String path;
-
+    private Iterator<Enemy> iter;
     public Manager(){
         CLI cli = new CLI(this);
         enemies=new ArrayList<>();
@@ -60,6 +61,7 @@ public class Manager {
         GameTile newTile = new Empty(e.getPosition());
         tiles.add(newTile);
         board.replaceTile(newTile);
+        iter.remove();
         enemies.remove(e);
         if (enemies.size() == 0){
             sendMessage("You beat level " + gameLevel + ". Good job!");
@@ -261,7 +263,10 @@ public class Manager {
         while (!gameOver){
             this.cli.acceptInput();
             if(enemies!=null) {
-                for (Enemy e : enemies) {
+                iter= enemies.iterator();
+                while (iter.hasNext())
+                {
+                    Enemy e=iter.next();
                     e.onGameTick();
                 }
             }

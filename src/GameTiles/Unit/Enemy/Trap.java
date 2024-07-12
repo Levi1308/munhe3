@@ -44,10 +44,7 @@ public class Trap extends Enemy {
         }
     }
 
-    @Override
-    public void interact(GameTile tile) {
-        // Implement interaction with GameTile (not specified in original code)
-    }
+
 
     @Override
     public void interact(Unit unit) {
