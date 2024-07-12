@@ -25,7 +25,7 @@ public abstract class Player extends Unit implements HeroicUnit{
     }
     public void levelUp()
     {
-        experience+=50*level;
+        experience = experience - (level * 50);
         level++;
         setHealth_pool(getHealth_pool()+10*level);
         setHealth_amount(getHealth_pool());
