@@ -45,12 +45,6 @@ public class Trap extends Enemy {
     }
 
 
-
-    @Override
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
-
     // Getters and Setters
     public int getVisibility_time() {
         return visibility_time;

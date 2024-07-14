@@ -18,7 +18,18 @@ public class Wall extends GameTile{
     public void interact(Wall wall) {
 
     }
+
+    @Override
+    public void interact(Enemy enemy) {
+
+    }
+
+    @Override
+    public void interact(Player player) {
+
+    }
     public void interact(Unit unit) {
+
     }
 
     @Override

@@ -53,9 +53,4 @@ public class Monster extends Enemy {
         return vision_range;
     }
 
-
-    public void interact(Enemy enemy){}
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
 }

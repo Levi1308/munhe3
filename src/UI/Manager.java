@@ -61,9 +61,12 @@ public class Manager {
         GameTile newTile = new Empty(e.getPosition());
         tiles.add(newTile);
         board.replaceTile(newTile);
+        Iterator<Enemy> temp= enemies.iterator();
+        while(temp.hasNext() && temp.next()!=e) {}
+        iter=temp;
         iter.remove();
-        enemies.remove(e);
-        if (enemies.size() == 0){
+        //enemies.remove(e);
+        if (enemies.isEmpty()){
             sendMessage("You beat level " + gameLevel + ". Good job!");
             nextLevel();
         }

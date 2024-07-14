@@ -9,5 +9,6 @@ import GameTiles.Wall;
 public interface Visitor {
     public void interact(Empty empty);
     public void interact(Wall wall);
-    public void interact(Unit unit);
+    public void interact(Enemy enemy);
+    public void interact(Player player);
 }

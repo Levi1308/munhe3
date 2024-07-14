@@ -2,9 +2,11 @@ package GameTiles.Unit.Enemy;
 
 
 import GameTiles.GameTile;
+import GameTiles.Unit.Visitor;
 import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Player.Player;
+import GameTiles.Wall;
 
 
 public abstract class Enemy extends Unit{
@@ -23,7 +25,7 @@ public abstract class Enemy extends Unit{
 
     public abstract void onGameTick();
 
-
+    @Override
     public void interact(Player player){
         manager.sendMessage(getName() + " engaged in combat with " + player.getName() + '.');
         int rand_att = random_Attack();
@@ -37,7 +39,7 @@ public abstract class Enemy extends Unit{
         }
         manager.sendMessage(player.description());
     }
-
+    @Override
     public void interact(Enemy enemy){}
 
     public void lose_health(int num){
@@ -49,5 +51,8 @@ public abstract class Enemy extends Unit{
             manager.removeEnemy(this);
         }
     }
-
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.interact(this);
+    }
 }

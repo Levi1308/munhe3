@@ -4,6 +4,7 @@ package GameTiles.Unit.Player;
 
 import GameTiles.Empty;
 import GameTiles.GameTile;
+import GameTiles.Unit.Visitor;
 import GameTiles.Utilis.Position;
 import GameTiles.Unit.Unit;
 import GameTiles.Unit.Enemy.*;
@@ -65,9 +66,10 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void interact(Enemy enemy) {
         this.battle(enemy);
     }
-
     @Override
-    public void interact(Player player) {}
+    public void interact(Player player) {
+
+    }
 
     protected void battle(Enemy enemy){
         manager.sendMessage(getName() + " engaged in combat with " + enemy.getName() + '.');
@@ -111,6 +113,12 @@ public abstract class Player extends Unit implements HeroicUnit{
     public void moveRight() {
         Visited tile =  board.getTile(getPosition().getX(), getPosition().getY() + 1); //move right
         tile.accept(this);
+    }
+    @Override
+    public void accept(Visitor visitor) {
+        if(visitor instanceof Player)
+            level=0;
+        visitor.interact(this);
     }
 }
 

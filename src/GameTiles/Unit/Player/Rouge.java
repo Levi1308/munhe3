@@ -40,6 +40,8 @@ public class Rouge extends Player{
                 "current_energy: " + current_energy+"\n";
     }
 
+
+
     @Override
     public void castAbility() {
         if (current_energy > cost) {

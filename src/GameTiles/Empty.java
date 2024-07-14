@@ -13,10 +13,6 @@ public class Empty extends GameTile {
         super('.', p);
     }
 
-    public void interact(Unit unit) {
-        this.swapTiles(unit);
-    }
-
     @Override
     public void accept(Visitor visitor) {
         visitor.interact(this);
@@ -26,6 +22,16 @@ public class Empty extends GameTile {
     }
 
     public void interact(Wall wall) {
+    }
+
+    @Override
+    public void interact(Enemy enemy) {
+        enemy.swapTiles(this);
+    }
+
+    @Override
+    public void interact(Player player) {
+        player.swapTiles(this);
     }
 
 }

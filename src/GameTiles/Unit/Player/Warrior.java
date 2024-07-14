@@ -64,9 +64,6 @@ public class Warrior extends Player {
             manager.sendMessage(getName() + " tried to cast Avenger's Shield, but there is a cooldown: " + remaining_cooldown);
         }
     }
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
     public Integer getAbility_cooldown() {
         return ability_cooldown;
     }

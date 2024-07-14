@@ -67,10 +67,6 @@ public class Hunter extends Player {
         }
     }
 
-    @Override
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
 
     // Getters and Setters
     public Integer getRange() {

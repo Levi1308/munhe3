@@ -95,21 +95,18 @@ public abstract class Unit extends GameTile implements Visitor{
         return attack;
     }
 
-    public void interact(Player player){
-        player.interact(this);
-    }
+    public abstract void interact(Player player);
 
-    public void interact(Enemy enemy){
-        enemy.interact(this);
-    }
+    public abstract void interact(Enemy enemy);
 
     public void interact(Empty empty){
-        this.swapTiles(empty);
+        empty.swapTiles(this);
     }
 
     public void interact(Wall wall){
         wall.interact(this);
     }
+
     public boolean isDead(){
         return health_amount <= 0;
     }
@@ -139,8 +136,5 @@ public abstract class Unit extends GameTile implements Visitor{
         return closeEnemy;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.interact(this);
-    }
+    public abstract void accept(Visitor visitor);
 }

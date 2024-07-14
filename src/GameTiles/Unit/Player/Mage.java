@@ -72,10 +72,6 @@ public class Mage extends Player{
             manager.sendMessage(getName() + " tried to cast Blizzard, but there was not enough mana: " + current_mana + '/' + mana_cost);
         }
     }
-
-    public void interact(Unit unit) {
-        unit.interact(this);
-    }
     public Integer getMana_pool() {
         return mana_pool;
     }
