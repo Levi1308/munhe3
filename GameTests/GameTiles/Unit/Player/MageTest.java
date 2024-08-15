@@ -1,63 +1,130 @@
 package GameTiles.Unit.Player;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import GameTiles.Utilis.Board;
 import GameTiles.Utilis.Position;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import UI.Manager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MageTest {
-    static Mage player1;
-    static Mage player2;
 
-    @BeforeAll
-    static void Initialize() {
-        player1 = new Mage('@', new Position(9, 1), "Melisandre", 100, 100, 5, 1, 300, 30, 15, 5, 6);
-        player2 = new Mage('@', new Position(15, 8), "Thoros of Myr", 250, 250, 25, 4, 150, 20, 20, 3, 4);
+    Mage mage1;
+    Mage mage2;
+
+    @BeforeEach
+    public void setUp() {
+        Manager manager = new Manager();
+        Board board = new Board(30, 30);
+        manager.setBoard(board);
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
+                Position position = new Position(i, j);
+                manager.initializer('.', position);
+            }
+        }
+        manager.create_player('1', new Position(5, 5));
+        Position p = new Position(0, 0);
+        mage1 = new Mage('@', p, "Melisandre", 100, 100, 5, 1, 300, 30, 15, 5, 6);
+        mage2 = new Mage('@', p, "Levi", 100, 100, 5, 3, 300, 20, 15, 15, 46);
     }
 
     @Test
     void levelUp() {
-        player1.levelUp();
-        assertEquals(100 + 25 * player1.getLevel(), (int) player1.getMana_pool());
-        assertEquals(Math.min(100 + player1.getLevel(), player1.getMana_pool()), (int) player1.getCurrent_mana());
-        assertEquals(15 + 10 * player1.getLevel(), (int) player1.getSpell_power());
+        int initialManaPool = mage1.getMana_pool();
+        int initialCurrentMana = mage1.getCurrent_mana();
+        int initialDefense = mage1.getDefense_points();
+
+        mage1.levelUp();
+
+        assertEquals(initialManaPool + 25 * mage1.getLevel(), mage1.getMana_pool());
+        assertEquals(Math.min(mage1.getMana_pool(), initialCurrentMana + (mage1.getMana_pool() / 4)), mage1.getCurrent_mana());
+        assertEquals(13, mage1.getAttack_points());
+        assertEquals(initialDefense + mage1.getLevel(), mage1.getDefense_points());
     }
 
     @Test
     void onGameTick() {
-        int initialMana = player1.getCurrent_mana();
-        player1.onGameTick();
-        assertEquals(Math.min(initialMana + player1.getLevel(), player1.getMana_pool()), (int) player1.getCurrent_mana());
+        for (int i = 0; i < 9; i++) {
+            mage1.onGameTick();
+        }
+        mage1.onGameTick();
+        assertEquals(85, mage1.getCurrent_mana());
     }
-
-    @Test
-    void description() {
-        String desc = player1.description();
-        assertNotNull(desc);
-        assertTrue(desc.contains("Mana: " + player1.getCurrent_mana() + "/" + player1.getMana_pool()));
-        assertTrue(desc.contains("Spell power: " + player1.getSpell_power()));
-    }
-
     @Test
     void castAbility() {
-        int initialMana = player1.getCurrent_mana();
-        if (initialMana > player1.getMana_cost()) {
-            player1.castAbility();
-            assertTrue(player1.getCurrent_mana() < initialMana); // Mana should decrease after casting ability
-        } else {
-            player1.castAbility();
-            assertEquals(initialMana, (int) player1.getCurrent_mana()); // Mana should remain the same if not enough
-        }
+        mage1.castAbility();
+        assertEquals(45, mage1.getCurrent_mana());
+
+        mage1.setCurrent_mana(0);
+        mage1.castAbility();
+        assertEquals(0, mage1.getCurrent_mana());
     }
 
     @Test
-    void interact() {
-        player1.interact(player2);
-        assertNotNull(player1);
-        assertNotNull(player2);
+    void getMana_pool() {
+        assertEquals(300, mage1.getMana_pool());
+    }
+
+    @Test
+    void setMana_pool() {
+        mage1.setMana_pool(350);
+        assertEquals(350, mage1.getMana_pool());
+    }
+
+    @Test
+    void getCurrent_mana() {
+        assertEquals(75, mage1.getCurrent_mana());
+    }
+
+    @Test
+    void setCurrent_mana() {
+        mage1.setCurrent_mana(40);
+        assertEquals(40, mage1.getCurrent_mana());
+    }
+
+    @Test
+    void getMana_cost() {
+        assertEquals(30, mage1.getMana_cost());
+    }
+
+    @Test
+    void setMana_cost() {
+        mage1.setMana_cost(20);
+        assertEquals(20, mage1.getMana_cost());
+    }
+
+    @Test
+    void getSpell_power() {
+        assertEquals(15, mage1.getSpell_power());
+    }
+
+    @Test
+    void setSpell_power() {
+        mage1.setSpell_power(10);
+        assertEquals(10, mage1.getSpell_power());
+    }
+
+    @Test
+    void getHits_count() {
+        assertEquals(5, mage1.getHits_count());
+    }
+
+    @Test
+    void setHits_count() {
+        mage1.setHits_count(10);
+        assertEquals(10, mage1.getHits_count());
+    }
+
+    @Test
+    void getAbility_range() {
+        assertEquals(6, mage1.getAbility_range());
+    }
+
+    @Test
+    void setAbility_range() {
+        mage1.setAbility_range(7);
+        assertEquals(7, mage1.getAbility_range());
     }
 }

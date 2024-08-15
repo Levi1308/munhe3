@@ -1,59 +1,106 @@
 package GameTiles;
 
+import GameTiles.Utilis.Board;
 import GameTiles.Utilis.Position;
+import UI.Manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameTileTest {
-    private GameTile gameTile1;
-    private GameTile gameTile2;
 
     @BeforeEach
-    void setUp() {
-        // Create GameTile instances for testing
-        Position position1 = new Position(1, 1);
-        Position position2 = new Position(2, 2);
-        gameTile1 = new Empty(position1);
-        gameTile2 = new Empty(position2);
+    public void setUp() {
+        Manager manager = new Manager();
+        Board board = new Board(30, 30);
+        manager.setBoard(board);
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
+                Position position = new Position(i, j);
+                manager.initializer('.', position);
+            }
+        }
+        manager.create_player('1', new Position(5, 5));
     }
 
     @Test
     void swapTiles() {
-        // Before swapping
-        Position originalPosition1 = gameTile1.getPosition();
-        Position originalPosition2 = gameTile2.getPosition();
+        // Create two GameTile instances at different positions
+        GameTile tile1 = new Empty(new Position(5, 5));
+        GameTile tile2 = new Empty(new Position(6, 6));
 
-        // Swap tiles
-        gameTile1.swapTiles(gameTile2);
+        // Swap the tiles
+        tile1.swapTiles(tile2);
 
-        // After swapping
-        assertEquals(originalPosition1, gameTile2.getPosition());
-        assertEquals(originalPosition2, gameTile1.getPosition());
+        // Assert that their positions have been swapped
+        assertEquals(new Position(6, 6), tile1.getPosition());
+        assertEquals(new Position(5, 5), tile2.getPosition());
     }
 
     @Test
     void range() {
-        // Calculate range between two tiles
-        double distance = gameTile1.range(gameTile2);
+        // Create two GameTile instances at specific positions
+        GameTile tile1 = new Empty(new Position(0, 0));
+        GameTile tile2 = new Empty(new Position(3, 4));
 
-        // Assuming positions are (1,1) and (2,2), the distance should be sqrt(2)
-        assertEquals(Math.sqrt(2), distance, 0.01);
+        // Calculate the distance between the two tiles
+        double distance = tile1.range(tile2);
+
+        // Assert the correct distance (5.0 in this case)
+        assertEquals(5.0, distance);
+    }
+
+    @Test
+    void getTile() {
+        // Create a GameTile instance with a specific tile character
+        GameTile tile = new Empty(new Position(5, 5));
+
+        // Assert that the tile character is correct
+        assertEquals('.', tile.getTile());
     }
 
     @Test
     void setTile() {
-        // Test setter for tile character
-        gameTile1.setTile('X');
-        assertEquals('X', gameTile1.getTile());
+        // Create a GameTile instance
+        GameTile tile = new Empty(new Position(5, 5));
+
+        // Set a new tile character
+        tile.setTile('#');
+
+        // Assert that the tile character was updated correctly
+        assertEquals('#', tile.getTile());
+    }
+
+    @Test
+    void getPosition() {
+        // Create a GameTile instance at a specific position
+        Position position = new Position(5, 5);
+        GameTile tile = new Empty(position);
+
+        // Assert that the position is correct
+        assertEquals(position, tile.getPosition());
     }
 
     @Test
     void setPosition() {
-        // Test setter for position
-        Position newPosition = new Position(3, 3);
-        gameTile1.setPosition(newPosition);
-        assertEquals(newPosition, gameTile1.getPosition());
+        // Create a GameTile instance at an initial position
+        GameTile tile = new Empty(new Position(5, 5));
+
+        // Set a new position
+        Position newPosition = new Position(10, 10);
+        tile.setPosition(newPosition);
+
+        // Assert that the position was updated correctly
+        assertEquals(newPosition, tile.getPosition());
+    }
+
+    @Test
+    void stringTile() {
+        // Create a GameTile instance with a specific tile character
+        GameTile tile = new Empty(new Position(5, 5));
+
+        // Assert that the string representation of the tile is correct
+        assertEquals(".", tile.StringTile());
     }
 }

@@ -1,63 +1,97 @@
 package GameTiles.Unit.Player;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import GameTiles.Utilis.Board;
 import GameTiles.Utilis.Position;
+import UI.Manager;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class HunterTest {
-    static Hunter player;
 
-    @BeforeAll
-    static void Initialize() {
-        Position p = new Position(9, 1);
-        player = new Hunter('@', p, "Ygritte", 220, 220, 30, 2, 6);
+    Position p;
+    Hunter hunter1;
+    Hunter hunter2;
+
+    @BeforeEach
+    public void setUp() {
+        Manager manager = new Manager();
+        Board board = new Board(30, 30);
+        manager.setBoard(board);
+        for (int i = 0; i < 30; i++) {
+            for (int j = 0; j < 30; j++) {
+                Position position = new Position(i, j);
+                manager.initializer('.', position);
+            }
+        }
+        manager.create_player('1', new Position(5, 5));
+        p = new Position(0, 0);
+        hunter1 = new Hunter('@', p, "Ygritte", 220, 220, 30, 2, 6);
+        hunter2 = new Hunter('@', p, "Saar", 300, 300, 30, 1, 5);
     }
 
     @Test
     void levelUp() {
-        int initialArrows = player.getArrows_count();
-        player.levelUp();
-        assertEquals(220 + 10 * player.getLevel(), (int) player.getHealth_pool());
-        assertEquals(initialArrows + 10 * player.getLevel(), (int) player.getArrows_count());
-        assertEquals(30 + 2 * player.getLevel(), (int) player.getAttack_points());
-        assertEquals(2 + player.getLevel(), (int) player.getDefense_points());
+        int initialArrows = hunter1.getArrows_count();
+        hunter1.levelUp();
+
+        assertEquals(initialArrows + 10 * hunter1.getLevel(), hunter1.getArrows_count());
+        assertEquals(42, hunter1.getAttack_points());
+        assertEquals(6, hunter1.getDefense_points());
     }
 
     @Test
     void onGameTick() {
-        int initialTicks = player.getTicks_count();
-        player.onGameTick();
-        if (initialTicks == 10) {
-            assertEquals(220 + player.getLevel(), (int) player.getArrows_count());
-            assertEquals(0, (int) player.getTicks_count());
-        } else {
-            assertEquals(initialTicks + 1, (int) player.getTicks_count());
+        for (int i = 0; i < 9; i++) {
+            hunter1.onGameTick();
+            assertEquals(i + 1, hunter1.getTicks_count());
         }
-    }
 
-    @Test
-    void description() {
-        String desc = player.description();
-        assertNotNull(desc);
-        assertTrue(desc.contains("range: " + player.getRange()));
-        assertTrue(desc.contains("arrows_count: " + player.getArrows_count()));
-        assertTrue(desc.contains("ticks_count: " + player.getTicks_count()));
+        hunter1.onGameTick();
+        assertEquals(10, hunter1.getTicks_count());
     }
-
     @Test
     void castAbility() {
-        // Assuming a mock manager for testing messages
-        player.castAbility(); // Assuming there's an enemy to hit
-        assertTrue(player.getArrows_count() < 220); // Arrows should decrease after casting ability
+        hunter1.setArrows_count(1);
+        hunter1.castAbility();
+        assertEquals(0, hunter1.getArrows_count());
+
+        hunter1.setArrows_count(0);
+        hunter1.castAbility();
+        assertEquals(0, hunter1.getArrows_count());
     }
 
     @Test
-    void interact() {
-        // Assuming a mock unit for testing interaction
-        player.interact(player); // Interaction with itself
-        assertNotNull(player);
+    void getRange() {
+        assertEquals(6, hunter1.getRange());
     }
 
-    // Additional tests can be added for edge cases or specific behaviors
+    @Test
+    void setRange() {
+        hunter1.setRange(7);
+        assertEquals(7, hunter1.getRange());
+    }
+
+    @Test
+    void getArrows_count() {
+        assertEquals(10 * hunter1.getLevel(), hunter1.getArrows_count());
+    }
+
+    @Test
+    void setArrows_count() {
+        hunter1.setArrows_count(5);
+        assertEquals(5, hunter1.getArrows_count());
+    }
+
+    @Test
+    void getTicks_count() {
+        assertEquals(0, hunter1.getTicks_count());
+    }
+
+    @Test
+    void setTicks_count() {
+        hunter1.setTicks_count(5);
+        assertEquals(5, hunter1.getTicks_count());
+    }
 }

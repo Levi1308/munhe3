@@ -50,7 +50,7 @@ public class Mage extends Player{
 
     @Override
     public void castAbility() {
-        if (current_mana > mana_cost) {
+        if (current_mana >= mana_cost) {
             current_mana = current_mana - mana_cost;
             int hits = 0;
             while (hits < hits_count) {
